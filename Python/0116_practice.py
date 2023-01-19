@@ -58,5 +58,3 @@ c=a #c에 a의 주솟값을 준 것. (참조)
 # print(id(num))
 # num = 14
 # print(id(num))
-name = input('이름을 입력 해 주세요. : ')
-print(name)
