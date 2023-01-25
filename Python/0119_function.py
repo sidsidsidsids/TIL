@@ -45,9 +45,10 @@
 
 # print(my_sum(5,3,5))
 
-def test(**kwargs):
-    print(kwargs, type(kwargs))
-    print(kwargs['name'])
-    return kwargs
+# def test(**kwargs):
+#     print(kwargs, type(kwargs))
+#     print(kwargs['name'])
+#     return kwargs
 
-test(name='aiden',age=21)
+# test(name='aiden',age=21)
+
