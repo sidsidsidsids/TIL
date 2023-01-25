@@ -18,6 +18,5 @@
 #         x=2
 #     func2()
 #     print(x)
-
 # func1()
 # print(x)
