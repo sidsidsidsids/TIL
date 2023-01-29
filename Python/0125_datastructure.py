@@ -36,7 +36,7 @@ my_tuple = (1, 2, 3, 4, 5, 6)
 #주어진 튜플에서 4와 5를 새로운 튜플에 할당해보세요
 new_tuple = my_tuple[3:-1]
 print(new_tuple)
-'''
+
 
 test_list = [1, 2, 3, 7, 4, 6, 5]
 test_list.sort()
@@ -48,6 +48,12 @@ scores = [('eng', 88), ('sci', 90), ('mth', 80)]
 print(scores)
 scores.sort(key=lambda x: x[1])
 print(scores)
+'''
+
+
+
+
+
 # 십진수를 이진수로 나타내는 재귀 함수
 '''
 def d(n):
