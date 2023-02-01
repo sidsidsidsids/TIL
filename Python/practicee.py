@@ -22,6 +22,7 @@ class Stack:
     def __repr__(self):
         return self.stack
 '''
+'''
 import sys
 
 N = int(sys.stdin.readline())
@@ -55,3 +56,6 @@ while count < N:
     else:
         pass
     count += 1
+'''
+for i in range(1,4):
+    print(i)
