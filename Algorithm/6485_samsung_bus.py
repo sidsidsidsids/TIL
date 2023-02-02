@@ -7,18 +7,25 @@
 P개의 버스 정류장에 대해 각 정류장에 몇 개의 버스 노선이 다니는지
 '''
 total_case = int(input())
-buses = int(input())
-A = []; B = []
-for i in range(buses):
-    Ai, Bi = map(int,input().split())
-    A.append(Ai)
-    B.append(Bi)
-P = int(input())
-bus_stop = [0]*P
-C = []
-for i in range(P):
-    Ci = int(input())
-    C.append(Ci)
-for i in range(buses):
-    bus_stop[A[i]-1 : B[i]] = i+1
-print(bus_stop)
+case = 0
+while case < total_case:
+    buses = int(input())
+    A = []; B = []
+    for i in range(buses):
+        Ai, Bi = map(int,input().split())
+        A.append(Ai)
+        B.append(Bi)
+    P = int(input())
+    bus_stop = [0]*P
+    C = []
+    for i in range(P):
+        Ci = int(input())
+        C.append(Ci)
+    for i in range(buses):
+        for j in range(A[i]-1,B[i]):
+            bus_stop[j] += 1
+    answer = ''
+    for num in bus_stop:
+        answer += f' {int(num)}'
+    print(f'#{case+1}{answer}')
+    case += 1
