@@ -57,5 +57,7 @@ while count < N:
         pass
     count += 1
 '''
-for i in range(1,4):
+
+K=5
+for i in range(K,1,-1):
     print(i)
