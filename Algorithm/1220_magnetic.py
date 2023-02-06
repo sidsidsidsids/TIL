@@ -13,9 +13,9 @@ S극에서 멀어지는 파랑(2)은 위로
 
 import sys
 sys.stdin = open("input.txt", "r")
-
+test_case = 1
 for _ in range(10):
-    test_case = int(input())
+    N = int(input())
     board = []
     answer = 0
     for _ in range(100): # 글자판 입력
@@ -23,5 +23,18 @@ for _ in range(10):
     for j in range(100):
         check_line = []
         for i in range(100):
-            check_line.append(board[i][j])
-        if 1 in check_line and 2 in check_line:
+            check_line.append(board[i][j]) # 세로로 입력받기
+        i = 0
+        while i <= 99:
+            if check_line[i] == 1:
+                for j in range(1,100-i):
+                    if i+j > 99:
+                        break
+                    elif check_line[i+j] == 2:
+                        answer += 1
+                        break
+                i += j
+            i += 1
+    print(f'#{test_case} {answer}')
+    test_case += 1
+
