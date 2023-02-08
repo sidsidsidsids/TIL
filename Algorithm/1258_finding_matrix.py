@@ -1,5 +1,5 @@
 '''
-왼쪽 위 꼭짓점에서 <- 어떻게 찾을거?
+왼쪽 위 꼭짓점에서 <- 어떻게?
     1. 해당 인덱스가 값을 가지고 왼쪽과 위가 인덱스 밖
     2. 해당 인덱스가 값을 가지고 왼쪽이 0 , 위가 인덱스 밖
     3. 해당 인덱스가 값을 가지고 왼쪽이 인덱스 밖, 위가 0
@@ -41,7 +41,7 @@ for tc in range(test_case):
     box_pair = {}
     for l in range(len(box_i)):
         box_pair[box_i[l], box_j[l]] = box_i[l]*box_j[l]
-    sort_box_pair = sorted(box_pair.keys(), key = lambda X :box_pair[X])
+    sort_box_pair = sorted(box_pair.keys(), key = lambda X :(box_pair[X], X[0]))
     answer = []
     for i in range(len(sort_box_pair)):
         answer.append(sort_box_pair[i][0])
