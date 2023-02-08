@@ -42,3 +42,13 @@ def Counting_Sort(A,B,k):
 
 Counting_Sort([0,4,1,3,1,2,4,1],[0]*(5),4)
 '''
+'''
+a = ['a','b','c','\0']
+def strlen(a):
+    i = 0
+    while a[i] != '\0':
+        i += 1
+    return i 
+
+print(strlen(a))
+'''
