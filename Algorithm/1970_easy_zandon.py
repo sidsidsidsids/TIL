@@ -2,7 +2,7 @@ test_cases = int(input())
 for tc in range(test_cases):
     zandon_list = [0] * 8
     N = int(input())
-    while N != 0 :
+    while N >= 10 :
         if N >= 50000:
             i = N // 50000
             zandon_list[0] += i

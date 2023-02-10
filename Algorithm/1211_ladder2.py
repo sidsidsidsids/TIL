@@ -4,7 +4,7 @@
 좌표 : data[i][j]
 i == 0 에서 시작하는 모든 길들 중에서
 목적지까지 가장 짧은 길을 가지는 출발지 j 값을 출력
-시작점 : data[0][j] 에서 사다리 거꾸로 타기
+시작점 : data[0][j] 에서 사다리 타기
 
 i 값이 99 될 때 까지 (움직일 때 마다 cnt += 1)
     옆 칸에 1이 안나오면
@@ -27,16 +27,19 @@ for _ in range(10):
     ladder = []
     for _ in range(100):
         ladder.append(list(map(int,input().split())))
-    i = 0 # 맨 첫 리스트 (맨 윗줄)
+
     j_start=[] # 출발점 인덱스들
     for j in range(100):
         if ladder[0][j] == 1:
             j_start.append(j)
+
     cnt_min = 10000
     answer = 0
-    for j in j_start:
+    i = 0  # 맨 첫 리스트 (맨 윗줄)
+
+    for j in j_start: # 출발점들 순환
         cnt = 0
-        start_pos = j
+        start_pos = j # 초기 x좌표 저장
         while i < 99:
             if j == 0:
                 if ladder[i][j+1] == 0:

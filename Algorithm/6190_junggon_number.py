@@ -3,17 +3,34 @@ for tc in range(test_cases):
     N = int(input())
     A = list(map(int,input().split()))
     danjo = []
-    for i in range(N):
-        danjo_test = []
-        for j in range(len(str(A[i]))):
-            danjo_test.append(A[i]%10)
-        if len(danjo_test) != 1:
-            for j in range(len(danjo_test) - 1):
-                if danjo_test[j] < danjo_test[j + 1]:
-                    break
-                else:
-                    if j == len(danjo_test) - 2:
-                        danjo.append(A[i])
+
+    A_multiple = {}
+    for i in A:
+        for j in A[A.index(i):]:
+            A_multiple[A[i], A[j]]=(A[i]*A[j])
+
+    print(A_multiple)
+
+    for num in A_multiple:
+        if num < 10:
+            danjo.append(num)
         else:
-            danjo.append(A[i])
-    print(danjo)
+            num = str(num)
+            d_check = 1
+            for i in range(len(num)-1):
+                if num[i] <= num[i+1]:
+                    continue
+                else:
+                    d_check = 0
+
+            if d_check == 1:
+                danjo.append(int(num))
+
+    if len(danjo) == 0:
+        print(f'#{tc+1} -1')
+    elif len(danjo) == 1:
+        print(f'#{tc + 1} {danjo[0]}')
+    else:
+        danjo.sort()
+        print(f'#{tc+1} {danjo[-1] * danjo[-2]}')
+
