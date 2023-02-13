@@ -5,13 +5,13 @@ for tc in range(test_cases):
     danjo = []
 
     A_multiple = {}
-    for i in A:
-        for j in A[A.index(i):]:
-            A_multiple[A[i], A[j]]=(A[i]*A[j])
+    for i in range(len(A)-1):
+        for j in range(i+1,len(A)):
+            A_multiple[A[i], A[j]]= (A[i]*A[j])
 
     print(A_multiple)
 
-    for num in A_multiple:
+    for keys, num in A_multiple.items():
         if num < 10:
             danjo.append(num)
         else:
@@ -28,9 +28,7 @@ for tc in range(test_cases):
 
     if len(danjo) == 0:
         print(f'#{tc+1} -1')
-    elif len(danjo) == 1:
-        print(f'#{tc + 1} {danjo[0]}')
     else:
         danjo.sort()
-        print(f'#{tc+1} {danjo[-1] * danjo[-2]}')
+        print(f'#{tc+1} {danjo[-1]}')
 
