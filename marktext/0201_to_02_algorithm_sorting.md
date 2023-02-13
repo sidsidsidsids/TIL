@@ -296,3 +296,85 @@
     - 불일치하고 문자가 패턴 내 존재하면 그 만큼 이동
   
   - Omega(N) (omega : 최소한의 걸리는 정도)
+
+### 스택
+
+> 물건을 쌓아 올리듯 자료를 쌓아 올린 형태의 자료구조
+> 
+> Last In First Out, 자료를 선형으로 저장할 저장소
+
+- 연산
+  
+  - 삽입(push)
+    
+    - append 메소드를 통해 리스트의 마지막에 데이터를 삽입
+      
+      - 단점 : 느림
+    
+    - ```python
+      def push(item,size):
+          global top
+          top += 1
+          if top==size:
+              print('overflow')
+          else:
+              stack[top] = item
+      
+      
+      size = 10
+      stack = [0] * size
+      top = -1
+      
+      push(10, size)
+      top += 1 # push(20)
+      stack[top] = 20 #
+      ```
+  
+  - 삭제(pop)
+    
+    - ```python
+      def pop():
+          global top
+          if top == -1:
+              print('underflow')
+              return 0
+          else:
+              top -= 1
+              return stack[top+1]
+      
+      print(pop())
+      
+      if top > -1: # pop()
+          top -= 1
+          print(stack[top+1])
+      ```
+  
+  - 공백인지 아닌지 확인(isEmpty)
+  
+  - top에 있는 item 반환(peek), (top : 마지막으로 들어온 원소가 저장된 위치)
+
+- 스택의 응용
+  
+  - 괄호검사
+    
+    - 괄호의 조건
+      
+      - 왼쪽 괄호와 오른쪽 괄호의 개수가 같다
+      
+      - 왼쪽 괄호는 오른쪽 괄호보다 먼저 나와야 한다
+      
+      - 괄호 사이에는 포함 관계만 존재한다
+    
+    - '(' 를 push, ')'가 나올 때 '(' pop
+      
+      - 이 과정을 끝냈을 때 남아있는 '('가 있으면 오류
+  
+  - Function call
+    
+    - 가장 마지막에 호출된 함수가 가장 먼저 실행을 완료하고 복귀하는 후입선출 구조 -> 이를 이용한 수행순서 관리
+    
+    - 함수 호출이 발생하면 호출한 함수 수행에 필요한 지역변수, 매개변수 및 수행 후 복귀할 주소 등의 정보를 스택 프레임에 저장하여 시스템 스택에 삽입
+    
+    - 함수의 실행이 끝나면 시스템 스택의 top 원소를 pop하면서 프레임에 저장되어 있던 복귀주소를 확인하고 복귀
+    
+    - 호출과 복귀에 따라 이 과정을 반복하여 전체 프로그램 수행이 종료되면 시스템 스택은 공백 스택이 된다
