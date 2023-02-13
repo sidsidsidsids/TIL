@@ -107,7 +107,7 @@ rlt = pre_process(p)
 
 print(rlt)
 '''
-
+'''
 # 스택
 stack = [0] * 3
 top = -1
@@ -129,3 +129,31 @@ if top > -1:
 if top > -1:
     top -= 1
     print(stack[top+1])
+'''
+'''
+# bracket
+test_case = int(input())
+for tc in range(test_case):
+    gwalho = input()
+
+    stack = [0] * len(gwalho)
+    top = -1
+    s_result = 0
+
+    for i in gwalho:
+        if top == size:
+            print('overflow')
+'''
+
+def func2():
+    print('함수 2 시작')
+    print('함수 2 종료')
+
+def func1():
+    print('함수 1 시작')
+    func2()
+    print('함수 1 종료')
+
+print('main 시작')
+func1()
+print('main 끝')
