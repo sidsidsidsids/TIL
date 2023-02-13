@@ -9,4 +9,4 @@ for tc in range(test_cases):
     for alphabet in str2:
         if alphabet in count_dict.keys(): # 딕셔너리에 알파벳이 있다면
             count_dict[alphabet] += 1 # value값 1 증가
-   print(f'#{tc+1} {max(count_dict.values())}')
+print(f'#{tc+1} {max(count_dict.values())}')
