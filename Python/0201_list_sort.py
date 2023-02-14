@@ -171,11 +171,13 @@ A = [10, 23, 30]
 B = [0] * 3
 f(0, 3)
 '''
-
+'''
 #입력값 V, E / arr
-#7 8
-#1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
-
+7 8
+1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
+'''
+'''
+# 재귀 DFS
 V, E = map(int, input().split())
 arr = list(map(int, input().split()))
 
@@ -191,7 +193,7 @@ for i in range(E):
     
     adjL[v1].append(v2)
     adjL[v2].append(v1)
-    
+
 def dfs(v):
     visited[v] = 1
     print(v, end=" ")
@@ -200,4 +202,20 @@ def dfs(v):
         if adjM[v][w] == 1 and visited[w] == 0:
             dfs(w)
 
+
+
+def dfs(v):
+    stack = [v]
+    # stack.append(v)
+    while len(stack): # 스택이 빌 때까지 반복
+        v = stack.pop()
+        # v가 아직 방문하지 않았다면
+        visited[v] = 1
+        print(v, end=" ")
+        for w in range(1, V+1):
+            if adjM[v][w] == 1 and visited[w] == 0:
+                stack.append(w)
+
+
 dfs(1)
+'''
