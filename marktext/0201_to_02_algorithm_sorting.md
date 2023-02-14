@@ -319,39 +319,39 @@
               print('overflow')
           else:
               stack[top] = item
-      
-      
+      ```
+
       size = 10
       stack = [0] * size
       top = -1
-      
+    
       push(10, size)
       top += 1 # push(20)
       stack[top] = 20 #
       ```
+
+- 삭제(pop)
   
-  - 삭제(pop)
+  - ```python
+    def pop():
+        global top
+        if top == -1:
+            print('underflow')
+            return 0
+        else:
+            top -= 1
+            return stack[top+1]
     
-    - ```python
-      def pop():
-          global top
-          if top == -1:
-              print('underflow')
-              return 0
-          else:
-              top -= 1
-              return stack[top+1]
-      
-      print(pop())
-      
-      if top > -1: # pop()
-          top -= 1
-          print(stack[top+1])
-      ```
-  
-  - 공백인지 아닌지 확인(isEmpty)
-  
-  - top에 있는 item 반환(peek), (top : 마지막으로 들어온 원소가 저장된 위치)
+    print(pop())
+    
+    if top > -1: # pop()
+        top -= 1
+        print(stack[top+1])
+    ```
+
+- 공백인지 아닌지 확인(isEmpty)
+
+- top에 있는 item 반환(peek), (top : 마지막으로 들어온 원소가 저장된 위치)
 
 - 스택의 응용
   
@@ -378,3 +378,40 @@
     - 함수의 실행이 끝나면 시스템 스택의 top 원소를 pop하면서 프레임에 저장되어 있던 복귀주소를 확인하고 복귀
     
     - 호출과 복귀에 따라 이 과정을 반복하여 전체 프로그램 수행이 종료되면 시스템 스택은 공백 스택이 된다
+
+- 재귀호출
+  
+  - 자기 자신을 호출하여 순환 수행
+  
+  - 프로그램의 크기를 줄이고 간단하게 작성할 수 있음
+  
+  - Memoization
+    
+    - 이전에 계산한 값을 메모리에 저장하여 매번 다시 계산하지 않도록 함
+
+### 동적계획 (DP)
+
+> 그리디 알고리즘과 같이 최적화 문제를 해결하는 알고리즘
+> 
+> 입력 크기가 작은 부분 문제들을 모두 해결한 후 이를 잉하여 큰 부분 문제들을 해결
+
+### 깊이우선탐색 (DFS)
+
+> 비선형구조인 그래프 구조는 그래프로 표현된 모든 자료를 빠짐없이 검색하는 것이 중요함
+> 
+> 가장 마지막에 만난 갈림길의 정점으로 되돌아가 다시 탐색하므로 스택(LIFO) 사용
+
+- 알고리즘
+  
+  - 시작 정점 v를 결정하여 방문한다
+  
+  - 정점 v에 인접한 정점 중
+    
+    - 방문하지 않은 정점 w가 있다면 v를 스택에 push 후 w 방문
+      그리고 w를 v로 하여 다시 반복
+    
+    - 방문하지 않은 점점이 없다면 탐색 방향을 바꾸기 위해 스택을 pop하여 받은 가장 마지막 방문 정점을 v로 하여 다시 반복
+  
+  - 스택이 공백이 될 때까지 2) 반복
+  
+  - 

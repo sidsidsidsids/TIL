@@ -144,7 +144,7 @@ for tc in range(test_case):
         if top == size:
             print('overflow')
 '''
-
+'''
 def func2():
     print('함수 2 시작')
     print('함수 2 종료')
@@ -157,3 +157,47 @@ def func1():
 print('main 시작')
 func1()
 print('main 끝')
+'''
+'''
+# i가 k가 될 때까지
+def f(i, k):
+    if i == k:
+        print(B)
+        return
+    else:
+        B[i] = A[i]
+        f(i+1, k)
+A = [10, 23, 30]
+B = [0] * 3
+f(0, 3)
+'''
+
+#입력값 V, E / arr
+#7 8
+#1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
+
+V, E = map(int, input().split())
+arr = list(map(int, input().split()))
+
+adjM = [[0] * (V+1) for _ in range(V+1)]
+adjL = [[] for _ in range(V+1)]
+
+visited = [0] * (V+1)
+
+for i in range(E):
+    v1, v2 = arr[i*2], arr[i*2+1]
+    adjM[v1][v2] = 1
+    adjM[v2][v1] = 1 # v1과 v2는 인접해있다
+    
+    adjL[v1].append(v2)
+    adjL[v2].append(v1)
+    
+def dfs(v):
+    visited[v] = 1
+    print(v, end=" ")
+    # 현재 v는 시작정점, 인접한 정점 중 방문을 안한 곳
+    for w in range(1, V+1):
+        if adjM[v][w] == 1 and visited[w] == 0:
+            dfs(w)
+
+dfs(1)
