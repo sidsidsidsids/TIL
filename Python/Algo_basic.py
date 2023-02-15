@@ -219,3 +219,106 @@ def dfs(v):
 
 dfs(1)
 '''
+'''
+# 백트래킹을 통한 순열 구하기
+def backtrack(a, k, input):
+    global MAXCANDIDATES
+    c = [0] * MAXCANDIDATES
+
+    if k == input:
+        for i in range(1, k+1):
+            print(a[i], end=" ")
+        print()
+
+    else:
+        k += 1
+        ncandidates = construct_candidates(a, k, input, c)
+        for i in range(ncandidates):
+            a[k] = c[i]
+            backtrack(a, k, input)
+
+def construct_candidates(a, k, input, c):
+    in_perm = [False] * NMAX
+
+    for i in range(1,k):
+        in_perm[a[i]] = True
+
+    ncandidates = 0
+    for i in range(1, input+1):
+        if in_perm[i] == False:
+            c[ncandidates] = i
+            ncandidates += 1
+    return ncandidates
+
+NMAX = 11
+MAXCANDIDATES = 10
+a = [0] * NMAX
+backtrack(a, 0, 3)
+'''
+
+'''
+# 조합 구하기
+def f(i, k):
+    if i == k:
+        print(bit)
+    else:
+        bit[i] = 1
+        f(i+1, k)
+        bit[i] = 0
+        f(i+1, k)
+A = {1,2,3,0,9}
+N = len(A)
+bit = [0]*N
+f(0, N)
+'''
+'''
+infix = '3-2*5+4/2-2'
+stack = []
+result = ''
+
+# 변환할 식을 순회
+for token in infix:
+    # 토큰이 피연산자인 경우
+    if token.isdecimal():
+        result += token
+
+    # 토큰이 연산자인 경우
+    else:
+        # 스택이 비어있는 경우, 스택에 push
+        if not stack: # if len(stack) == 0
+            stack.append(token)
+
+        else:
+            # (는 incoming 우선순위가 가장 높음
+            if token == '(':
+                stack.append(token)
+            # )는 (가 나올때까지 스택에서 pop, result에 append
+            elif token == ')':
+                while stack[-1] != '(':
+                    result += stack.pop()
+                stack.pop()
+
+            # incoming 우선순위가 2인 경우
+            elif token == '*' or token == '/':
+                # 스택의 top 토큰이 우선순위가 낮을 때까지 스택에서 pop, result append
+                while stack and (stack[-1] == '*' or stack[-1] == '/'):
+                    result += stack.pop()
+                stack.append(token)
+
+            # incoming 우선순위가 1인 경우
+            elif token == '+' or token == '-':
+                # 스택의 top 토큰이 우선순위가 낮을 때까지 스택에서 pop, result append
+                while stack and stack[-1] != '(':
+                    result += stack.pop()
+                stack.append(token)
+
+while stack:
+    result += stack.pop()
+
+print(result)
+
+# 피연산자
+    # 스택에 push
+# 연산자 (*, / 연산 순서 주의
+    # 스택에 담겨있는 2개의 토큰을 pop 후 연산 후 스택에 push
+'''

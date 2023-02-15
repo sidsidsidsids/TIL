@@ -1,6 +1,11 @@
 test_case = int(input())
 for tc in range(test_case):
-    prices = map(int,input().split())
-    for i in range(len(prices)-1):
-        for j in range(i+1,len(prices)):
-            if prices[i] < prices[j]
+    n = int(input())
+    prices = list(map(int,input().split()))
+
+    profit = 0
+    for i in range(n-1):
+        if prices[i] < max(prices[i+1:]):
+            profit += max(prices[i+1:]) - prices[i]
+
+    print(f'#{tc+1} {profit}')

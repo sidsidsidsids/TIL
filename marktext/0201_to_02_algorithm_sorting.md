@@ -320,14 +320,17 @@
           else:
               stack[top] = item
       ```
-
+      
       size = 10
       stack = [0] * size
       top = -1
-    
+      
       push(10, size)
       top += 1 # push(20)
       stack[top] = 20 #
+      
+      ```
+      
       ```
 
 - 삭제(pop)
@@ -413,5 +416,130 @@
     - 방문하지 않은 점점이 없다면 탐색 방향을 바꾸기 위해 스택을 pop하여 받은 가장 마지막 방문 정점을 v로 하여 다시 반복
   
   - 스택이 공백이 될 때까지 2) 반복
+
+### 스택 이용 풀이
+
+- 계산기1
   
-  - 
+  - 중위표기식(A + B)을 후위표기식(A B +)으로 바꾸어 스택을 이용하여 푸는 방법 
+    (연산자를 스택에 넣어 식 변환)
+
+- 계산기2
+  
+  - 후위표기법으로 표현된 수식을 스택에 넣음
+    (피연산자를 스택에 넣어 계산)
+
+- 백트래킹
+  
+  - 해를 찾는 도중에 막히면(해가 아니면) 되돌아가서 다시 해를 찾아 가는 기법이며 최적화와 결정 문제를 해결할 수 있다
+    
+    - 결정 문제 : 문제의 조건을 만족하는 해가 존재하는지에 대한 문제
+      
+      - 미로 찾기
+        
+        - DFS 처럼 지나온 길들을 기록하고 막히면 pop해서 갈림길로
+        
+        - 백트래킹과 DFS의 차이는 백트래킹은 불필요한 경로를 조기에 차단함
+        
+        - 일반적으로 DFS보다 백트래킹이 경우의 수가 줄어듬(일부 경우에서는 지수함수 시간을 요해 처리 불가능할 수 있음)
+      
+      - n-Queen
+      
+      - Map coloring
+      
+      - subset sum
+  
+  - 백트래킹 기법은 어떤 노드의 유망성을 점검한 후 유망하지 않다고 결정되면 그 노드의 부모로 되돌아가(backtracking) 다음 자식 노드로 감
+    
+    - 가지치기(pruning) : 유망하지 않는 노드가 포함되는 경로는 더 이상 고려 X
+  
+  - 절차
+    
+    - 상태 공간 트리의 깊이 우선 검색을 실시한다
+    
+    - 각 노드가 유망한지를 점검한다
+    
+    - 만일 그 노드가 유망하지 않으면, 그 노드의 부모 노드로 돌아가서 검색함
+  
+  - 부분집합 구하기
+    
+    - n개의 원소가 들어있는 집합의 2^n개의 부분집합을 만들 때는 true/false 값을 가지는 항목들로 구성된 n개의 배열을 만드는 방법 이용
+    
+    - ```python
+      # 4 elements combination
+      bit = [0,0,0,0]
+      for i in range(2):
+          bit[0] = i
+          for j in range(2):
+              bit[1] = j
+              for k in range(2):
+                  bit[2] = k
+                  for l in range(2):
+                      bit[3] = l
+                      print(bit)
+      ```
+    
+    - ```python
+      # 1,2,3 permutation
+      for i1 in range(1,4):
+          for i2 in range(1,4):
+              if i2 != i1:
+                  for i3 in range(1,4):
+                      if i3 != i1 and i3 != i2:
+                          print(i1, i2, i3)
+      ```
+    
+    - ```python
+      # permutaion with backtracking
+      def backtrack(a, k, input):
+          global MAXCANDIDATES
+          c = [0] * MAXCANDIDATES
+      
+          if k == input:
+              for i in range(1, k+1):
+                  print(a[i], end=" ")
+              print()
+      
+          else:
+              k += 1
+              ncandidates = construct_candidates(a, k, input, c)
+              for i in range(ncandidates):
+                  a[k] = c[i]
+                  backtrack(a, k, input)
+      
+      def construct_candidates(a, k, input, c):
+          in_perm = [False] * NMAX
+      
+          for i in range(1,k):
+              in_perm[a[i]] = True
+      
+          ncandidates = 0
+          for i in range(1, input+1):
+              if in_perm[i] == False:
+                  c[ncandidates] = i
+                  ncandidates += 1
+          return ncandidates
+      
+      NMAX = 11
+      MAXCANDIDATES = 10
+      a = [0] * NMAX
+      backtrack(a, 0, 3)
+      ```
+    
+    - ```python
+      # combination with function
+      def f(i, k):
+          if i == k:
+              print(bit)
+          else:
+              bit[i] = 1
+              f(i+1, k)
+              bit[i] = 0
+              f(i+1, k)
+      A = {1,2,3,0,9}
+      N = len(A)
+      bit = [0]*N
+      f(0, N)
+      ```
+    
+    - 
