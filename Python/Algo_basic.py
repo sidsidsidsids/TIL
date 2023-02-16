@@ -260,16 +260,90 @@ backtrack(a, 0, 3)
 # 조합 구하기
 def f(i, k):
     if i == k:
+        #print(bit)
+        for j in range(k):
+            if bit[j]:
+                print(A[j], end = ' ')
         print(bit)
     else:
         bit[i] = 1
         f(i+1, k)
         bit[i] = 0
         f(i+1, k)
-A = {1,2,3,0,9}
+A = [1,2,3,5,9]
 N = len(A)
 bit = [0]*N
 f(0, N)
+'''
+'''
+# 조합 구하기 응용 부분집합의 합 구하기
+def f(i, k, key):
+    if i == k:
+        s = 0
+        for j in range(k):
+            if bit[j]:
+                s += A[j]
+        if s == key:
+            for j in range(k):
+                if bit[j]:
+                    print(A[j], end=' ')
+            print(bit)
+    else:
+        bit[i] = 1
+        f(i+1, k, key)
+        bit[i] = 0
+        f(i+1, k, key)
+A = [r for r in range(1,11)]
+N = len(A)
+key = 10
+bit = [0]*N
+f(0, N, key)
+'''
+'''
+# 합이 key인 부분집합의 수 구하기
+
+N = 10 #len(A)
+A = [r for r in range(1,N+1)]
+key = 10
+cnt = 0; fcnt=0
+bit = [0]*N
+
+def f(i, k, s, t): # i:원소, k:집합의 크기, s:부분집합의 합(=i-1까지 고려된), t:목표(찾고자하는값)
+    global cnt
+    global fcnt # 함수 호출 횟수 세는 변수 선언
+    fcnt += 1
+    # 백트레킹
+    if s > t: # 고려한 원소의 합이 찾는 합보다 큰 경우
+        return
+    elif s == t: # 남은 원소를 고려할 필요가 없는 경우
+        cnt += 1
+        return
+    # 탐색
+    elif i == k: # 모든 원소 고려
+        return
+    else:
+        bit[i] = 1
+        f(i+1, k, s+A[i], t) # A[i] 포함
+        bit[i] = 0
+        f(i+1, k, s, t) # A[i] 미포함
+
+f(0,N,0,key)
+print(cnt, fcnt)
+'''
+'''
+def f(i, k):
+    if i == k:
+        print(p)
+    else:
+        for j in range(i, k):
+            p[i], p[j] = p[j], p[i]
+            # p[i] 결정, p[i]와 관련된 작업 가능
+            f(i+1, k)
+            p[i], p[j] = p[j], p[i]
+
+
+p = [1,2,3]
+f(0,3)
 '''
 '''
 infix = '3-2*5+4/2-2'

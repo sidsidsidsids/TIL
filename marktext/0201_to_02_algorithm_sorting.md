@@ -541,5 +541,52 @@
       bit = [0]*N
       f(0, N)
       ```
-    
-    - 
+
+### 분할 정복 알고리즘
+
+> 나폴레옹이 사용한 전략이 유래이며 분할, 정복, 통합으로 이루어짐
+
+- 거듭제곱
+  
+  - ```python
+    def Power(Base, Exponent):
+        if Base == 0:
+            return 1
+        result = 1 # Base^0은 1이므로
+        for i in range(Exponent):
+            result *= Base
+        return result
+    ```
+
+- 퀵 정렬 (Quick Sort)
+  
+  - 주어진 배열을 두 개로 분할하고 각각을 정렬한다
+  
+  - 합병정렬은 그냥 두 부분으로 나누지만 퀵 정렬은 기준 아이템 중심으로 나눔
+  
+  - 후처리 과정이 필요 없음
+  
+  - ```python
+    def quickSort(a, begin, end):
+        if begin < end:
+            p = partition(a, begin, end)
+            quickSort(a, begin, p-1)
+            quickSort(a, p+1, end)
+    ```
+  
+  - ```python
+    def partition(a, begin, end):
+        pivot = (begin + end) // 2
+        L = begin
+        R = end
+        while L < R:
+            while(L<R and a[L] < a[pivot]) : L += 1
+            while(L<R and a[R] >= a[pivot]) : R -= 1
+            if L < R:
+                if L == pivot : pivot = R
+                a[L], a[R] = a[R], a[L]
+        a[pivot], a[R] = a[R], a[pivot]
+        return R
+    ```
+  
+  - 
