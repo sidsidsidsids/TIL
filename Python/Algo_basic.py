@@ -345,8 +345,8 @@ def f(i, k):
 p = [1,2,3]
 f(0,3)
 '''
-'''
-infix = '3-2*5+4/2-2'
+
+infix = '7+4*2' #'(7-2)*5+4+7*(4/2-2)'
 stack = []
 result = ''
 
@@ -355,22 +355,26 @@ for token in infix:
     # 토큰이 피연산자인 경우
     if token.isdecimal():
         result += token
+        print(f'token : {token}, stack : {stack}, result : {result}')
 
     # 토큰이 연산자인 경우
     else:
         # 스택이 비어있는 경우, 스택에 push
         if not stack: # if len(stack) == 0
             stack.append(token)
+            print(f'token : {token}, stack : {stack}, result : {result}')
 
         else:
             # (는 incoming 우선순위가 가장 높음
             if token == '(':
                 stack.append(token)
+                print(f'token : {token}, stack : {stack}, result : {result}')
             # )는 (가 나올때까지 스택에서 pop, result에 append
             elif token == ')':
                 while stack[-1] != '(':
                     result += stack.pop()
                 stack.pop()
+                print(f'token : {token}, stack : {stack}, result : {result}')
 
             # incoming 우선순위가 2인 경우
             elif token == '*' or token == '/':
@@ -378,6 +382,7 @@ for token in infix:
                 while stack and (stack[-1] == '*' or stack[-1] == '/'):
                     result += stack.pop()
                 stack.append(token)
+                print(f'token : {token}, stack : {stack}, result : {result}')
 
             # incoming 우선순위가 1인 경우
             elif token == '+' or token == '-':
@@ -385,14 +390,15 @@ for token in infix:
                 while stack and stack[-1] != '(':
                     result += stack.pop()
                 stack.append(token)
+                print(f'token : {token}, stack : {stack}, result : {result}')
 
 while stack:
     result += stack.pop()
+    print(f'stack : {stack}, result : {result}')
 
-print(result)
+print(f'result : {result}')
 
 # 피연산자
     # 스택에 push
 # 연산자 (*, / 연산 순서 주의
     # 스택에 담겨있는 2개의 토큰을 pop 후 연산 후 스택에 push
-'''
