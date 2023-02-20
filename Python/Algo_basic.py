@@ -345,8 +345,8 @@ def f(i, k):
 p = [1,2,3]
 f(0,3)
 '''
-
-infix = '7+4*2' #'(7-2)*5+4+7*(4/2-2)'
+'''
+infix = '(7-2)*5+4+7*(4/2-2)'
 stack = []
 result = ''
 
@@ -402,3 +402,30 @@ print(f'result : {result}')
     # 스택에 push
 # 연산자 (*, / 연산 순서 주의
     # 스택에 담겨있는 2개의 토큰을 pop 후 연산 후 스택에 push
+'''
+def enqueue(data):
+    global rear
+    rear += 1
+    queue[rear] = data
+
+def dequeue():
+    global front
+    front += 1
+    return queue[front]
+
+queue = [0]*3
+front = -1
+rear = -1
+
+rear += 1 #enqueue(1)
+queue[rear] = 1
+enqueue(2)
+enqueue(3)
+
+print(dequeue())
+print(dequeue())
+if front != rear:
+    print(dequeue())
+if front != rear:
+    print(dequeue())
+print(queue)

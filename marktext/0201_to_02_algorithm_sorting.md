@@ -588,5 +588,211 @@
         a[pivot], a[R] = a[R], a[pivot]
         return R
     ```
+
+### 큐(Queue)
+
+> 스택과 마찬가지로 삽입과 삭제의 위치가 제한적인 자료구조
+> 
+> 선입선출 (First In First Out)
+
+- 연산
   
-  - 
+  - enQueue(item)
+    
+    - 큐의 뒤쪽에 원소를 삽입
+  
+  - deQueue()
+    
+    - 큐의 앞쪽에 원소를 삭제하고 반환
+  
+  - createQueue()
+    
+    - 공백 큐 생성
+  
+  - isEmpty()
+    
+    - 큐가 공백상태인지 확인
+  
+  - isFull()
+    
+    - 큐가 포화상태인지 확인
+  
+  - Qpeek()
+    
+    - 큐의 앞쪽에서 원소를 삭제 없이 반환
+
+- 선형큐
+  
+  - 1차원 배열을 이용한 큐
+    
+    - 큐의 크기 = 배열의 크기
+    
+    - front : deQueue된 원소 (저장된 첫 번째 원소의 인덱스)
+    
+    - rear : 저장된 마지막 원소의 인덱스
+  
+  - 상태 표현
+    
+    - 초기 상태 : front = rear = -1
+    
+    - 공백 상태 : front == rear
+    
+    - 포화 상태 : rear == n-1 (n : 배열의 크기, n-1 : 배열의 마지막 인덱스)
+  
+  - 구현
+    
+    - 크기가 n인 1차원 배열 생성
+    
+    - front와 rear를 -1로 초기화
+    
+    - enQueue(item)
+      
+      - ```python
+        def enQueue(item):
+            global rear
+            if isFull() : print('Full')
+            else:
+                rear <- rear + 1;
+                Q[rear] <- item;
+        ```
+      
+      - 마지막 원소 뒤에 새로운 원소를 삽입하기 위해
+        
+        - rear 값을 하나 증가시켜 새 원소를 삽입할 자리 마련
+        
+        - 그 인덱스에 해당하는 배열원소 Q[rear]에 item 저장
+    
+    - deQueue()
+      
+      - ```python
+        deQueue()
+            if(isEmpty()) then Queue_Empty();
+            else{
+                front <- front+1;
+                return Q[front];
+            }
+        ```
+      
+      - 가장 앞에 있는 원소를 삭제하기 위해
+        
+        - front 값을 하나 증가시켜 큐에 남아있게 될 첫 번째 원소 이동
+        
+        - 새 첫 원소를 리턴함으로써 삭제와 동일한 기능
+    
+    - isEmpty(). isFull()
+      
+      - ```python
+        def isEmpty():
+            return front == rear
+        def isFull():
+            return rear == len(Q) - 1
+        ```
+      
+      - 공백상태 : front == rear
+      
+      - 포화상태 : rear == n-1 (n: 배열의 크기, n-1 : 배열의 마지막 인덱스)
+    
+    - Qpeek()
+      
+      - ```python
+        def Qpeek():
+            if isEmpty() : print("Queue_Empty")
+            else : return Q[front+1]
+        ```
+      
+      - 가장 앞에 있는 원소를 검색하여 반환
+      
+      - 현재 front의 한자리 뒤(front + 1)에 있는 원소, 즉 큐의 첫 원소를 반환
+  
+  - 선형 큐 이용시 문제점
+    
+    - 잘못된 포화상태 인식
+      
+      - 선형 큐 이용 원소 삽입 삭제의 경우 배열 앞부분에 활용할 수 있는 공간이 있음에도 불구하고 포화상태로 인식하여 더 이상 삽입을 수행하지 않음
+      
+      - 해결방법 1
+        
+        - 매 연산이 이루어질 때마다 원소들을 배열 앞부분으로 이동시키기
+          
+          - 비효율적
+      
+      - 해결방법 2
+        
+        - 1차원 배열을 사용하되 논리적으로 배열의 처음과 끝이 연결되어 원형 형태의 큐를 이룬다고 가정하고 사용
+          
+          - 초기 공백 상태
+            
+            - front = rear = 0
+          
+          - index 순환
+            
+            - front와 rear 위치가 배열의 마지막 인덱스인 n-1를 가리킨 후,
+              그 다음 논리적 순환을 이루어 배열의 첫 인덱스인 0으로 이동
+            
+            - 이를 위해 나머지 연산자 mod 사용
+          
+          - front
+            
+            - 공백/포화 구분을 쉽게 하기 위해 항상 빈자리로 둠
+          
+          - 삽입 위치 및 삭제 위치
+            
+            - | --  | 삽입위치                    | 삭제위치                      |
+              | --- | ----------------------- | ------------------------- |
+              | 선형큐 | rear = rear + 1         | front = front + 1         |
+              | 원형큐 | rear = (rear + 1) mod n | front = (front + 1) mod n |
+          
+          - 초기 공백 큐 생성
+            
+            - 크기가 n인 1차원 배열 생성
+            
+            - front와 rear를 0으로 초기화
+          
+          - 공백상태 및 포화상태
+            
+            - 공백상태 : front == rear
+            
+            - 포화상태 : (rear + 1) mod n == front
+            
+            - ```python
+              def isEmpty():
+                  return front == rear
+              def isFull():
+                  return (rear+1) % len(cQ) == front
+              ```
+          
+          - 삽입
+            
+            - ```python
+              def enQueue(item):
+                  global rear
+                  if isFull():
+                      print('Full')
+                  else:
+                      rear = (rear+1) % len(cQ)
+                      cQ[rear] = item
+              ```
+            
+            - 마지막 원소 뒤에 새로운 원소를 삽입하기 위해
+              
+              - rear 값을 조정하여 새 원소를 삽입할 자리를 마련
+              
+              - 그 인덱스에 해당하는 배열원소 cQ[rear]에 item 저장
+          
+          - 삭제
+            
+            - ```python
+              def deQueue():
+                  global front
+                  if isEmpty():
+                      print("Empty")
+                  else:
+                      front = (front + 1) % len(cQ)
+                      return cQ[front]
+              ```
+            
+            - 가장 앞에 있는 원소를 삭제하기 위해
+            
+            - front 값을 조정하여 삭제할 자리 준비
+            
+            - 새 front 원소를 리턴 함으로써 삭제와 동일한 기능
