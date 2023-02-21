@@ -1,21 +1,4 @@
 '''
-def enqueue(item):
-    global rear
-
-    rear = (rear+1) % len(n)
-    n[rear] = item
-
-def dequeue():
-    global front
-
-    front = (front + 1) % len(n)
-    temper = n[front]
-
-    return temper
-
-def isFull():
-    return (rear+1) % len(n) == front
-'''
 for _ in range(1,11):
     tc = int(input())
     n = list(map(int,input().split()))
@@ -33,6 +16,23 @@ for _ in range(1,11):
                 n.append(temp)
     print(f'#{tc}', *n)
 '''
+'''
+def enqueue(item):
+    global rear
+
+    rear = (rear+1) % len(n)
+    n[rear] = item
+
+def dequeue():
+    global front
+
+    front = (front + 1) % len(n)
+    temper = n[front]
+
+    return temper
+
+def isFull():
+    return (rear+1) % len(n) == front
 
 
 def pw(lst):
@@ -57,4 +57,23 @@ for tc in range(1, 11):
         print(new_lst[(pos + i) % 8], end=' ')
     print()
 '''
+#import sys
+#sys.stdin = open('input.txt')
 
+for _ in range(1,11):
+    tc = int(input())
+    data = list(map(int,input().split()))
+
+    cnt = 1
+
+    while data[-1] > 0:
+
+        if cnt > 5:
+            cnt = 1
+
+        # 첫번째 위치한 숫자를 감소시킨 뒤 맨 뒤로 보내기
+        data.append(data.pop(0) - cnt)
+        cnt += 1
+
+    # 데이터의 마지막 값은 0으로 고정
+    data[-1] = 0

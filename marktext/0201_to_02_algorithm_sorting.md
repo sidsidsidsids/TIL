@@ -796,3 +796,40 @@
             - front 값을 조정하여 삭제할 자리 준비
             
             - 새 front 원소를 리턴 함으로써 삭제와 동일한 기능
+
+- 버퍼(Buffer)
+  
+  - 데이터를 한 곳에서 다른 한 곳으로 전송하는 동안 일시적으로 그 데이터를 보관하는 메모리 영역
+  
+  - 버퍼링 : 버퍼를 활용하는 방식 또는 버퍼를 채우는 동작
+  
+  - 버퍼는 일반적으로 입출력 및 네트워크와 관련된 기능에서 이용되며 큐 구조임
+
+- BFS
+  
+  - 탐색 시작점의 인접한 정점들을 모두 차례로 방문한 후에 방문했던 정점을 시작점으로 하여 다시 인접한 정점들을 차례로 방문하는 방식
+  
+  - 인접한 정점들에 대해 탐색 후 다시 너비우선탐색을 진행해야 하므로 큐 활용
+  
+  - ```python
+    def BFS(G, v): # graph G, start point V
+        visited = [0] * (n+1) # n : amount of points
+        queue = [] # create queue
+        queue.append(v) # enQueue v in queue
+        while queue: # if queue is not empty
+            t = queue.pop(0) # return queue's first element
+            if not visited[t]: # if not visited point
+                visited[t] = True # change status : visit
+                visit(t) # the thing should do in point t
+                for i in G[t]: # all the points that related to t
+                    if not visited[i]: # if not visited point
+                        queue.append(i) # enQueue in queue
+    ```
+  
+  - 초기 상태
+    
+    - visited 배열 초기화(중복방지용)
+    
+    - Q 생성
+    
+    - 시작점 enqueue

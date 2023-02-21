@@ -403,6 +403,8 @@ print(f'result : {result}')
 # 연산자 (*, / 연산 순서 주의
     # 스택에 담겨있는 2개의 토큰을 pop 후 연산 후 스택에 push
 '''
+
+'''
 def enqueue(data):
     global rear
     rear += 1
@@ -429,3 +431,68 @@ if front != rear:
 if front != rear:
     print(dequeue())
 print(queue)
+'''
+'''
+# 혼자 해본거
+def BFS(G, v, n): # G : 그래프, v : 시작점, n : 정점의 갯수
+    visited = [0] * (n+1)
+    queue = []
+    queue.append(v)
+    visited[v] = 1
+
+    while queue:
+        t = queue.pop(0)
+        if t == 0:
+            continue
+        print(t, end=' ')
+        for i in G[t] :
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = visited[n] + 1
+
+V = 7; E = 8
+arr = [1, 2, 1, 3, 2, 4, 2, 5, 4, 6, 5, 6, 6, 7, 3, 7]
+arrM = [ [0] * (V+1) for _ in range(V+1) ]
+
+for i in range(E):
+    v1, v2 = arr[2*i], arr[2*i + 1]
+    arrM[v1][v2] = v2
+    # arrM[v2][v1] = v1
+
+#print(arrM)
+
+BFS(arrM, 1, V)
+'''
+
+def bfs(v, N):
+    visited = [0] * (N+1) # visited 생성
+    q = [v] # queue 생성 및 시작점 enQueue
+    visited[v] = 1 # 시작점 enQueue 표시
+
+    while q: # 큐가 비어질 때 까지
+        t = q.pop(0) # deQueue
+        print(t, end = ' ') # t 출력(t에서 처리할 일)
+        for v in adjL[t]: # t에 인접하고 방문한 적 없는 w
+            if visited[v] == 0:
+                q.append(v) # v enQueue
+                visited[v] = visited[t] + 1 # enQueue 표시(with distance)
+    print()
+    print(visited) # distance
+
+V = 7; E = 8
+arr = [1, 2, 1, 3, 2, 4, 2, 5, 4, 6, 5, 6, 6, 7, 3, 7]
+adjL = [[] for _ in range(V+1)]
+for i in range(E):
+    n1, n2 = arr[2*i], arr[2*i + 1]
+    adjL[n1].append(n2)
+    adjL[n2].append(n1)
+print(adjL)
+
+bfs(1, V) # 시작정점 1, 마지막 정점 V
+
+
+# # 예제 : 미로의 거리
+# def bfs(i, j, N):
+#     visited = [ [0] * N for _ in range(N) ]
+#     q = [i, j] # q = [[i, j]]
+#     visited[i][j] = 1
