@@ -57,7 +57,25 @@ while count < N:
         pass
     count += 1
 '''
+'''
+linked_list = '1->2->3->2->1'
+as_list = linked_list.split('->')
 
-K=5
-for i in range(K,1,-1):
-    print(i)
+def Palindrome(input_list):
+    half = len(input_list)//2
+    return input_list[:half] == input_list[::-1][:half]
+
+print(Palindrome(as_list))
+'''
+class Node:
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+
+node1 = Node(1)
+node2 = Node(3)
+node1.next = node2
+head = node1
+
+print(node1.next.data)
+print(node2.next)
