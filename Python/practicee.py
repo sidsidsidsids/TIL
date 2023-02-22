@@ -57,7 +57,7 @@ while count < N:
         pass
     count += 1
 '''
-'''
+
 linked_list = '1->2->3->2->1'
 as_list = linked_list.split('->')
 
@@ -66,6 +66,7 @@ def Palindrome(input_list):
     return input_list[:half] == input_list[::-1][:half]
 
 print(Palindrome(as_list))
+
 '''
 class Node:
     def __init__(self, data=None, next=None):
@@ -79,3 +80,37 @@ head = node1
 
 print(node1.next.data)
 print(node2.next)
+'''
+'''
+def reversed_sum(a,b):
+    a = a.split(' -> '); b = b.split(' -> ')
+    a_val = 0; b_val = 0
+    for i in range(len(a)):
+        a_val += int(a[i]) * 10 ** (len(a)-(i+1))
+    for i in range(len(b)):
+        b_val += int(b[i]) * 10 ** (len(b)-(i+1))
+    tot_val = a_val + b_val
+
+    tot_val = str(tot_val)
+    reversed_list = []
+    for v in tot_val[::-1]:
+        reversed_list.append(v)
+
+    return(' -> '.join(reversed_list))
+
+linked_list_1 = '2 -> 4 -> 3'
+linked_list_2 = '5 -> 6 -> 4'
+
+print(reversed_sum(linked_list_1, linked_list_2))
+'''
+'''
+def node_pair_swap(L):
+    L = L.split(' -> ')
+    for i in range(0,len(L),2):
+        L[i], L[i+1] = L[i+1], L[i]
+
+    return(' -> '.join(L))
+
+linked_list = '1 -> 2 -> 3 -> 4'
+print(node_pair_swap(linked_list))
+'''

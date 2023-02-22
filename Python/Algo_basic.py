@@ -463,7 +463,7 @@ for i in range(E):
 
 BFS(arrM, 1, V)
 '''
-
+'''
 def bfs(v, N):
     visited = [0] * (N+1) # visited 생성
     q = [v] # queue 생성 및 시작점 enQueue
@@ -496,3 +496,38 @@ bfs(1, V) # 시작정점 1, 마지막 정점 V
 #     visited = [ [0] * N for _ in range(N) ]
 #     q = [i, j] # q = [[i, j]]
 #     visited[i][j] = 1
+'''
+
+#self
+def tree_VLR(s):
+    print(s, end=' ')
+    visited[s] = 1
+
+    for v in arrL[s]:
+        if visited[v] == 0:
+            tree_VLR(v)
+
+def tree_LVR(s):
+    visited[s] = 1
+    for v in arrL[s]:
+        if not arrL[s]:
+            print(s)
+        elif visited[v] == 0:
+            tree_VLR(v)
+
+    print(s, end=' ')
+
+
+V = int(input())
+arr = list(map(int,input().split()))
+E = V - 1
+
+arrL = [ [] for _ in range(V+1) ]
+for i in range(E):
+    v1, v2 = arr[2*i], arr[2*i + 1]
+    arrL[v1].append(v2)
+visited = [0] * (V+1)
+
+tree_VLR(1)
+#tree_LVR(1)
+
