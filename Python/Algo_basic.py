@@ -497,7 +497,7 @@ bfs(1, V) # 시작정점 1, 마지막 정점 V
 #     q = [i, j] # q = [[i, j]]
 #     visited[i][j] = 1
 '''
-
+'''
 #self
 def tree_VLR(s):
     print(s, end=' ')
@@ -530,4 +530,94 @@ visited = [0] * (V+1)
 
 tree_VLR(1)
 #tree_LVR(1)
+'''
+'''
+def preorder(i):
+    if i:
+        print(i, end=' ')
+        preorder(left[i])
+        preorder(right[i])
 
+
+V = 13
+arr = [1, 2, 1, 3, 2, 4, 3, 5, 3, 6,4, 7, 5, 8, 5, 9, 6, 10 ,6, 11 ,7, 12, 11 ,13]
+E = V - 1
+left = [0] * (V + 1)
+right = [0] * (V + 1)
+par = [0] * (V + 1)
+#child = [[] for _ in range(V+1)]
+
+for i in range(E):
+    p, c = arr[2*i], arr[2*i + 1]
+    if left[p] == 0:
+        left[p] = c
+    else:
+        right[p] = c
+    par[c] = p
+    #child[p].append(c)
+
+root = 1
+while par[root] != 0:
+    root += 1
+preorder(root)
+'''
+
+'''
+최대힙 구현
+100개의 숫자 가정
+heap = [0] * (100 + 1)
+last = 0
+enQ(n)
+    last += 1
+    heap[last] = n
+    c = last # 부모 > 자식 확인
+    p = c // 2
+    while p > 0 and heap[p] < heap[c]:
+        heap[p], heap[c] = heap[c], heap[p]
+        c, p = p, c//2
+'''
+def enQ(n):
+    global last
+    last += 1 # 완전이진트리의 마지막 정점을 추가
+    heap[last] = n # 마지막 정점에 저장
+    c = last # 부모가 있고, 부모 > 자식인지 조건 검사
+    p = c//2
+    while p > 0 and heap[p] < heap[c]:
+        heap[p], heap[c] = heap[c], heap[p]
+        c = p # 옮긴 자리에서의 부모와 비교하기 위해
+        p = c // 2
+    return
+
+def deQ():
+    global last
+    tmp = heap[1] # 루트 원소 백업
+    heap[1] = heap[last] # 마지막 정점의 값을 루트로 이동
+    last -= 1 # 마지막 정점 노드 삭제
+    p = 1
+    c = p * 2 # 왼쪽 자식 번호
+    while c <= last: # 자식이 하나 이상 있으면
+        if c+1 <= last and heap[c] < heap[c+1]:
+            # 오른쪽 자식도 있고 오른쪽 자식의 키가 더 크면
+            c += 1 # 비교 대상을 오른쪽 자식으로 변경
+        if heap[c] > heap[p]: # 자식이 부모보다 크면
+            heap[c], heap[p] = heap[p], heap[c]
+            p = c
+            c = p * 2
+        else:
+            break
+    return tmp
+
+
+heap = [0] * 101 # 완전이진트리라 1번부터 100번 인덱스를 준비함
+last = 0 # 완전이진트리의 마지막 정점 번호
+enQ(5)
+print(heap)
+enQ(14)
+print(heap)
+enQ(8)
+print(heap)
+enQ(20)
+print(heap)
+
+while last>0:
+    print(deQ())
