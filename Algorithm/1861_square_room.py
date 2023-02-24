@@ -38,5 +38,4 @@ for tc in range(1,test_case+1):
             #         break
             #     else:
             #         break
-    print(start)
-    print(f'#{tc} {min(start)} {maximum + 1}')
+    print(f'#{tc} {minimum_height} {maximum + 1}')
