@@ -29,9 +29,5 @@ for tc in range(1,test_case+1):
                 if k > longest:
                     longest = k
                 k = 0
-                # for k in range(N):
-                #     if i+k >= M or grid[i+k][j] == 0:
-                #         if k > longest:
-                #             longest = k
     
     print(f'#{tc} {longest}')

@@ -39,38 +39,32 @@ for tc in range(test_cases):
 
 '''
 test_cases = int(input())
-for tc in range(test_cases):
+for tc in range(1, test_cases + 1):
     N = int(input())
-    A = list(map(int,input().split()))
-    danjo = []
+    nums = list(map(int,input().split()))
+    AiAj = []
 
-    A_multiple = {}
-    for i in range(len(A)-1):
-        for j in range(i+1,len(A)):
-            A_multiple[A[i], A[j]]= (A[i]*A[j])
+    for i in range(N-1):
+        for j in range(i+1,N):
+            AiAj.append(nums[i]*nums[j])
 
-    # print(A_multiple)
+    AiAj.sort(reverse=True)
+    answer = -1
 
-    for keys, num in A_multiple.items():
-        if num < 10:
-            danjo.append(num)
-        else:
-            num = str(num)
-            d_check = 1
-            for i in range(len(num)-1):
-                if num[i] <= num[i+1]:
-                    continue
-                else:
-                    d_check = 0
+    for num in AiAj:
+        string_num = str(num)
 
-            if d_check == 1:
-                danjo.append(int(num))
+        s = True
+        for i in range(len(string_num)-1):
+            if string_num[i] > string_num[i+1]:
+                s = False
+                break
+            else:
+                pass
+        if s == True:
+            answer = num
+            break
 
-    if len(danjo) == 0:
-        print(f'#{tc+1} -1')
-    elif len(danjo) == 1:
-        print(f'#{tc + 1} {danjo[0]}')
-    else:
-        danjo.sort()
-        print(f'#{tc+1} {danjo[-1]}')
+    print(f'#{tc} {answer}')
+
         
