@@ -201,24 +201,54 @@ def dfs(v):
     for w in range(1, V+1):
         if adjM[v][w] == 1 and visited[w] == 0:
             dfs(w)
-
-
-
-def dfs(v):
-    stack = [v]
-    # stack.append(v)
-    while len(stack): # 스택이 빌 때까지 반복
-        v = stack.pop()
-        # v가 아직 방문하지 않았다면
-        visited[v] = 1
-        print(v, end=" ")
-        for w in range(1, V+1):
-            if adjM[v][w] == 1 and visited[w] == 0:
-                stack.append(w)
-
-
-dfs(1)
 '''
+'''
+#입력값 V, E / arr
+7 8
+1 2 1 3 2 4 2 5 4 6 5 6 6 7 3 7
+'''
+'''
+# 스택 DFS
+def DFS(s):
+    stack = []
+    visited = [0] * (V+1)
+    stack.append(s)
+    visited[s] = 1
+
+    while stack:
+        elem = stack.pop()
+        print(elem,end=' ')
+        for w in arrL[elem][::-1]:
+            if visited[w] == 0:
+                stack.append(w)
+                visited[w] = 1
+# 큐 BFS
+def BFS(s):
+    Q = []
+    visited = [0]*(V+1)
+    Q.append(s)
+    visited[s] = 1
+
+    while Q:
+        elem = Q.pop(0)
+        print(elem,end=' ')
+        for w in arrL[elem]:
+            if visited[w] == 0:
+                Q.append(w)
+                visited[w] = 1
+
+V, E = map(int,input().split())
+arr = list(map(int,input().split()))
+arrL = [ [] for _ in range(V+1) ]
+
+for i in range(E):
+    v1, v2 = arr[2*i], arr[2*i + 1]
+    arrL[v1].append(v2)
+DFS(1)
+print()
+BFS(1)
+'''
+
 '''
 # 백트래킹을 통한 순열 구하기
 def backtrack(a, k, input):
@@ -576,6 +606,7 @@ enQ(n)
         heap[p], heap[c] = heap[c], heap[p]
         c, p = p, c//2
 '''
+'''
 def enQ(n):
     global last
     last += 1 # 완전이진트리의 마지막 정점을 추가
@@ -621,3 +652,4 @@ print(heap)
 
 while last>0:
     print(deQ())
+'''
