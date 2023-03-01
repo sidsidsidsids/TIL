@@ -115,26 +115,6 @@ linked_list = '1 -> 2 -> 3 -> 4'
 print(node_pair_swap(linked_list))
 '''
 '''
-# 12. Graph
-def f(i, k):
-    if i == k:
-        comb = []
-        for j in range(k):
-            if bit[j]:
-                comb.append(nums[j])
-        return ans.append(comb)
-    else:
-        bit[i] = 0
-        f(i+1, k)
-        bit[i] = 1
-        f(i+1, k)
-
-nums = [1,2,3]
-bit = [0]*len(nums)
-ans=[]
-f(0, len(nums))
-print(ans)
-'''
 def pre_process(T):
     lps = [0] * len(T)
 
@@ -168,4 +148,127 @@ P = 'eaba'
 
 lps = pre_process(T)
 print(lps)
+'''
+
+
+# 12. Graph
+def f(i, k):
+    if i == k:
+        comb = []
+        for j in range(k):
+            if bit[j]:
+                comb.append(nums[j])
+        return ans.append(comb)
+    else:
+        bit[i] = 0
+        f(i+1, k)
+        bit[i] = 1
+        f(i+1, k)
+
+nums = [1,2,3]
+bit = [0]*len(nums)
+ans=[]
+f(0, len(nums))
+print(ans)
+
+
+
+def sum_f(candidates, target):
+    result = []
+
+    def dfs(goal, idx, status):
+        if goal < 0:
+            return
+        if goal == 0:
+            result.append(status)
+            return
+        for i in range(idx, len(candidates)):
+            if candidates[i] == 0:
+                continue
+                # 0 예외 처리
+            dfs(goal - candidates[i], i, status + [candidates[i]])
+            # dfs 에서 i가 아닌 0을 넣으면 조합이 아닌 순열을 구현
+
+    dfs(target, 0, [])
+    return result
+
+#print(sum_f(candidates=[0,2,3,6,7], target=7)) # [[2, 2, 3], [7]]
+
+#
+def bfs(start):
+    Q = []
+    time_total = 0
+    visited[start] = 1
+    Q.append(start)
+
+    while Q:
+        s = Q.pop(0)
+        time_tmp = []
+        for node in adjL[s]:
+            if visited[node] == 0:
+                visited[node] = 1
+                Q.append(node)
+                time_tmp.append(time(s,node))
+        if time_tmp:
+            time_total += max(time_tmp)
+
+    return time_total
+
+def time(from_n, to_n):
+    for i in range(len(times)):
+        if times[i][0] == from_n and times[i][1] == to_n:
+            return times[i][2]
+    else:
+        return 0
+
+times = [[2,1,1],[2,3,1],[3,4,1]] # [노드(from), 노드(to), 소요 시간]
+N = 4 # 노드 개수
+K = 2 # 출발 노드
+
+L = len(times)
+visited = [0] * (N+1)
+adjL = [ [] for _ in range(N+1) ]
+
+for i in range(L):
+    adjL[times[i][0]] += [times[i][1]]
+
+#print(bfs(K))
+'''
+tree = [3, 9, 20, None, None, 15, 7]
+
+n = 1
+while True:
+    if len(tree) < 2**n:
+        print(n)
+        break
+    n += 1
+'''
+def tree_dist(s):
+    dist[s] += 1
+
+tree = [1, 2, 3, 4, 5]
+left = [2, 4, None, None, None]
+right = [3, 5, None, None, None]
+dist = [0]*(5+1)
+'''
+def tree_convertor(s):
+    idx = tree.index(s)
+    l_node = left[idx]
+    r_node = right[idx]
+    if l_node and r_node:
+        l = tree.index(l_node)
+        r = tree.index(r_node)
+        tree[l], tree[r] = tree_convertor(r_node), tree_convertor(l_node)
+        return s
+    else:
+        if idx%2:
+            tree[idx-1], tree[idx] = tree[idx], tree[idx-1]
+
+tree = [4, 2, 7, 1, 3, 6, 9]
+left = [2, 1, 6, 0, 0, 0, 0]
+right = [7, 3, 9, 0, 0, 0, 0]
+
+tree_convertor(4)
+print(tree)
+'''
 
