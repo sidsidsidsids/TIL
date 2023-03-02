@@ -150,7 +150,7 @@ lps = pre_process(T)
 print(lps)
 '''
 
-
+'''
 # 12. Graph
 def f(i, k):
     if i == k:
@@ -231,7 +231,7 @@ adjL = [ [] for _ in range(N+1) ]
 
 for i in range(L):
     adjL[times[i][0]] += [times[i][1]]
-
+'''
 #print(bfs(K))
 '''
 tree = [3, 9, 20, None, None, 15, 7]
@@ -243,6 +243,7 @@ while True:
         break
     n += 1
 '''
+'''
 def tree_dist(s):
     dist[s] += 1
 
@@ -251,24 +252,78 @@ left = [2, 4, None, None, None]
 right = [3, 5, None, None, None]
 dist = [0]*(5+1)
 '''
+
 def tree_convertor(s):
-    idx = tree.index(s)
-    l_node = left[idx]
-    r_node = right[idx]
-    if l_node and r_node:
-        l = tree.index(l_node)
-        r = tree.index(r_node)
-        tree[l], tree[r] = tree_convertor(r_node), tree_convertor(l_node)
-        return s
-    else:
-        if idx%2:
-            tree[idx-1], tree[idx] = tree[idx], tree[idx-1]
+    if s and left[s] and right[s]:
+        tree_val[left[s]], tree_val[right[s]] = tree_convertor(right[s]), tree_convertor(left[s])
+        return tree_val[s]
+    elif s:
+        pass
+    return None
 
-tree = [4, 2, 7, 1, 3, 6, 9]
-left = [2, 1, 6, 0, 0, 0, 0]
-right = [7, 3, 9, 0, 0, 0, 0]
+tree_idx = [None, 1, 2, 3, 4, 5, 6, 7]
+tree_val = [None, 4, 2, 7, 1, 3, 6, 9]
+left = [None, 2, 4, 6, None, None, None, None]
+right = [None, 3, 5, 7, None, None, None, None]
 
-tree_convertor(4)
-print(tree)
+tree_convertor(1)
+print(tree_val)
+
+
+# tree = [3,9,20,null,null,15,7]
+# n = 1
+# while True:
+#     if len(tree) < 2**n:
+#         for i in range(2**(n-1),len(tree)):
+#
+#     n += 1
+
 '''
+tree_idx = [None,1,2,3,4,5,6,7,None,None,None,11,None,None,None,15]
+tree_val = [None,4,1,6,0,2,5,7,None,None,None,3,None,None,None,8]
+left = [None,2,4,6,None,None,None,None,None,None,None,None,None,None,None,None]
+right = [None,3,5,7,None,11,None,15,None,None,None,None,None,None,None,None]
+path_total = 0
 
+def tree_sum(s):
+    global path_total
+    if s:
+        tree_sum(right[tree_idx[s]])
+        if tree_val[s] != None:
+            path_total += tree_val[s]
+            tree_val[s] = path_total
+        tree_sum(left[tree_idx[s]])
+
+tree_sum(1)
+print(tree_val)
+'''
+'''
+tree_idx = [None,1,2,3,4,5,None,7]
+tree_val = [None,10,5,15,3,7,None,18]
+left = [None,2,4,None,None,None,None,None]
+right = [None,3,5,7,None,None,None,None]
+L = 7
+R = 15
+total = 0
+
+def tree_sum_with_limit(s):
+    global total
+    if s:
+        tree_sum_with_limit(right[tree_idx[s]])
+        if L <= tree_val[s] <= R:
+            total += tree_val[s]
+        tree_sum_with_limit(left[tree_idx[s]])
+
+tree_sum_with_limit(1)
+
+print(total)
+'''
+'''
+VLR_input = [3, 9, 20, 15, 7]
+# 루트가 3, 루트의 왼쪽 자식이 9임을 알 수 있음
+LVR_input = [9, 3, 15, 20, 7]
+# 20이 9의 자식 노드가 아님을 알 수 있음
+# 즉 20은 루트의 오른쪽 자식 노드이므로 
+tree_idx = [1, 2, 3, 4, 5]
+left = [2, ]
+'''
