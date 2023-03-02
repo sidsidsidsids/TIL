@@ -1,4 +1,6 @@
-N = int(input())
+import sys
+
+N = int(sys.stdin.readline())
 card = [0] * N
 for i in range(N):
     card[i] = N-i
