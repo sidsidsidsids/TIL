@@ -8,7 +8,7 @@ for i in range(test_case):
     A_cnt = 0; B_cnt = 0
 
     start = 1
-    end = P-1
+    end = P
     while start <= end:
         middle = (start + end) // 2
         if middle == A:
@@ -21,7 +21,7 @@ for i in range(test_case):
             start = middle
 
     start = 1
-    end = P-1
+    end = P
     while start <= end:
         middle = (start + end) // 2
         if middle == B:
