@@ -1,0 +1,65 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF=8" />
+      <title>Document</title>
+    </head>
+
+    <body>
+      <h1>Portfolio</h1>
+
+      <h3>My name is Aiden</h3>
+
+      <div>abcd1234</div>
+
+      <a href="https://www.google.com">google</a>
+
+    </body>
+</html>-->
+
+<!DOCTYPE html> <!-- 내가 쓴 언어가 html이다 의미 -->
+<html lang="en"> <!-- root element -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1 style="
+    color: blueviolet;
+    font-size: 56;
+">제목입니다</h1>
+    
+    <style>
+      /* 자손 결합자  공백으로 구분한다*/
+      /*div span{
+        color : red;
+      }*/
+      /* 자식 결합자   >으로 구분한다*/
+      div>span{
+        color : red;
+      }
+      /* 일반 형제 결합자 */
+      /* 선택한 태그의 형제 요소 중에서, 뒤에 위치하는 요소 모두 선택 */
+      p~span{
+        color:chartreuse;
+      }
+      /* 일접 형제 결합자 */
+      /* 선택한 태그의 형제 요소 중에서, 바로 뒤에 위치하는 요소 선택 */
+      p+span{
+        color : magenta;
+      }
+    </style>
+</head>
+<body>
+    <div class="d1">
+      <span class="span1">span #1</span>
+      <p>p tag #1</p>
+      <p>
+        <span>p tag # 2 안에 있는 span #2</span>
+      </p>
+    </div>
+  
+    
+</body>
+</html>
