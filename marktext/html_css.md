@@ -127,6 +127,10 @@
 > Cascading Style Sheets
 > 
 > 스타일을 지정하기 위한 언어
+> 
+> <link rel = "stylesheet" href=".css">
+> 
+> <link rel = "stylesheet" href=".css">
 
 - 용어
   
@@ -174,4 +178,91 @@
     
     - 속정 중에는 상속이 되는 것과 돠지 않는 것들이 있다
 
+- CSS 원칙
+  
+  - 모든 요소는 네모(박스모델)이고 위에서부터 아래로, 왼쪽에서 오른쪽으로 쌓인다
+    (Normal Flow)
 
+- Box model
+  
+  - 하나의 박스는 네 부분(영역)으로 이루어짐
+    
+    - content : 글이나 이미지 등 요소의 실제 내용
+    
+    - padding : 테두리 안쪽 내부 여백, 요소에 적용된 배경색, 이미지가 적용됨
+    
+    - border : 테두리 영역
+    
+    - margin : 테두리 바깥 외부 여백, 배경색 지정 불가
+  
+  - box의 width을 한번에 보고 싶을 때(content + padding의 width)
+    box-sizing을 border-box으로 설정
+
+- 개발자 도구
+  
+  - 크롬 등 웹 브라우저에서 제공하는 개발과 관련된 다양한 기능을 제공
+    
+    - 주요 기능
+      
+      - Elements - DOM 탐색 및 CSS 확인 및 변경
+      
+      - Styles - 요소에 적용된 CSS 확인
+      
+      - Computed - 스타일이 계산된 최종 결과
+      
+      - Event Listeners - 해당 요소에 적용된 이벤트 (JS)
+
+- CSS Display
+  
+  - display에 따라 크기와 배치가 달라진다
+    
+    - div는 한 줄을 다 차지함
+  
+  - display : block
+    
+    - 줄 바꿈이 일어나는 요소 (다른 elem 밀어냄)
+    
+    - 화면 크기 전체의 가로 폭을 차지함
+    
+    - 블록 레벨 요소 안에 인라인 레벨 요소가 들어갈 수 있음
+  
+  - display : inline
+    
+    - 줄 바꿈이 일어나지 않는 행의 일부 요소
+    
+    - content 만큼만 차지함 (width, height, margin 지정 불가)
+    
+    - 상하 여백은 line-height로 지정
+  
+  - 블록 레벨 요소와 인라인 레벨 요소
+    
+    - 블록 레벨 : div / ul, ol, li / p / hr / form 등
+    
+    - 인라인 레벨 : span / a / img / input, label / b, em, i, strong
+  
+  - display : inline-block (안중요)
+    
+    - block과 inline 레벨 요소의 특징을 모두 가짐
+    
+    - inline처럼 한 줄에 표시 가능
+  
+  - display : none
+    
+    - 해당 요소를 화면에 표시하지 않고 공간 조차 부여되지 않음
+    
+    - 공간만 차지하기 - visibility : hidden;
+
+- CSS Position
+  
+  - 문서 상에서 요소의 위치를 지정
+    
+    - static : 기본값
+    
+    - relative : 상대 위치(자기 자신의 static 위치 기준)
+    
+    - absolute : 절대 위치(요소를 일반 흐름에서 제거 후 레이아웃에 공간 차지 X) 
+    
+    - fixed : absolute와 같으나 부모 요소를 기준으로 삼지 않고 viewport가 기준
+      (viewport : 화면(창)의 크기)
+    
+    - sticky : 스크롤에 따라 static ->  fixed로 변경
