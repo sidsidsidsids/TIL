@@ -6,5 +6,5 @@ for _ in range(test_case):
         for j in range(6):
             for k in range(4):
                 if i + 2*j + 3*k == n:
-                    cnt += 1
+
     print(cnt)
