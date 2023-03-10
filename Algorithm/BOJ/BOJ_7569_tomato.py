@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 M, N, H = map(int,input().split()) # 가로 세로 층높이
 tomato = [ [ list(map(int,input().split()) ) for _ in range(N) ] for _ in range(H) ]
 
