@@ -1,13 +1,10 @@
 sentence = input()
 target = str(input())
-stack = ''
 
-for w in sentence:
-    stack += w
-    if target in stack:
-        stack.replace(target,'')
+while target in sentence:
+    sentence = sentence.replace(target,'')
 
-if stack:
-    print(stack)
+if sentence:
+    print(sentence)
 else:
     print('FRULA')
