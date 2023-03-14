@@ -8,4 +8,6 @@
 
 - [Python](https://github.com/sidsidsidsids/TIL/tree/master/Python)
 
-- [Web](https://github.com/sidsidsidsids/TIL/tree/master/Web)
+- [Html](https://github.com/sidsidsidsids/TIL/tree/master/html_css)
+
+- [Django](https://github.com/sidsidsidsids/TIL/tree/master/django)
