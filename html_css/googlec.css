@@ -1,0 +1,34 @@
+.topbox {
+    display: flex;
+    height: 100px;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.google_info {
+    
+    font-size: 15px;
+}
+
+.searchspace {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 800px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 2em;
+}
+
+.midbox {
+    display: flex;
+    height: 450px;
+    justify-content: center;
+
+}
+.botbox {
+    display: flex;
+    height: 500px;
+}
