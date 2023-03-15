@@ -155,5 +155,107 @@
 > Django의 세 가지 구조 : Model, View, Template
 
 - URLs
+
+
+
+### Design Pattern
+
+> 소프트웨어도 자주 사용되는 구조와 해결책이 있다.
+> 
+> 클라이언트-서버 구조도 소프트웨어 디자인 패턴 중 하나
+
+- 장점
   
-  - 
+  - 복잡한 커뮤니케이션이 매우 간단해짐
+
+- Django에서의 Design Pattern
+  
+  - MTV Pattern
+    
+    - MVC Design Pattern을 조금 변형한 패턴
+      
+      - MVC : Model(데이터 관련 로직) - View(레이아웃과 화면) - Controller(명령을 Model과 View 부분으로 연결)
+      
+      - MVC의 목적 : 관심사를 분리하여 더 나은 업무 분리와 관리 제공 
+        -> 유지보수 용이
+    
+    - MTV : Model - Template - View , MVC와 크게 다른 점은 없으며 부르는 이름이 다름
+    
+    - Model : MVC에서의 Model, 데이터 로직 관리 및 응용프로그램의 데이터 구조 정의와 데이터베이스 기록 관리
+    
+    - Template : MVC에서의 View, 레이아웃과 화면 처리, 화면상 사용자 인터페이스 구조와 레이아웃 정의
+    
+    - View : MVC에서의 Controller, Model & Template과 관련한 로직을 처리해서 응답을 반환하며 클라이언트의 요청에 대해 처리를 분기함
+
+
+
+### Django Template
+
+> 데이터 표현을 제어하는 도구이자 표현에 관련된 로직
+
+- Django Template Language (DTL)
+  
+  - Django Template에서 사용하는 built-in template system
+  
+  - 단순히 Python이 HTML에 포함 된 것이 아니므로 주의
+  
+  - 프로그래밍적 로직이 아닌 프레젠테이션을 표현하기 위한 것
+
+- DTL Syntax
+  
+  - Variable : 변수
+    
+    - 밑줄로는 시작 불가하며 공백이나 구두점 문자 또한 불가
+    
+    - dot(.) 이용하여 변수 속성 접근 가능
+    
+    - render()의 세번째 인자로 {'key':value}와 같이 dictionary 형태로 넘기며
+      여기서 정의한 key에 해당하는 문자열이 template에서 사용 가능한 변수명임
+  
+  - Filters : 변수가 어떻게 보여질 지 조정
+    
+    - 표시할 변수를 수정할 때 사용하며 60개의 built-in template filters 제공
+    
+    - chained가 가능하며 일부 필터는 인자를 받기도 함
+  
+  - Tags : 기능
+    
+    - 출력 텍스트를 만들거나 반복 또는 논리를 수행하여 제어 흐름을 만드는 등 복잡한 일들을 수행
+    
+    - 일부 태그는 시작과 종료 태그가 필요함
+    
+    - 약 24개의 built-in template tags 제공
+  
+  - Comments : 주석
+    
+    - 한 줄 주석에만 사용할 수 있으며 유효하지 않은 템플릿 코드가 포함될 수 있음
+    
+    - 여러 줄 주석은 {% comment %}와 {% endcomment %} 사이에 입력
+
+
+
+### Template inheritance
+
+- 템플릿 상속
+  
+  - 기본적으로 코드의 재사용성에 초점을 맞춤
+  
+  - 태그를 이용하여 할 수 있음
+    
+    - 반드시 템플릿 최상단에 작성 되어야 함 (즉, 2개 이상 사용 불가)
+
+### Trailing URL Slashes
+
+- Django는 URL 끝에 /(Trailing slash)가 없다면 자동으로 붙이는 것이 기본 설정
+
+### Variable routing
+
+- URL 주소를 변수로 사용하는 것을 의미함
+
+- 일부를 변수로 지정하여 view 함수의 인자로 넘길 수 있음
+  
+  - 따라서 변수 값에 따라 하나의 path()에 여러 페이지 연결할 수 있음
+
+### App URL mapping
+
+- urls.py를 쪼개어 각각의 app 폴더 안에 urls.py를 작성하여 매핑할 수 있다
