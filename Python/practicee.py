@@ -252,7 +252,7 @@ left = [2, 4, None, None, None]
 right = [3, 5, None, None, None]
 dist = [0]*(5+1)
 '''
-
+'''
 def tree_convertor(s):
     if s and left[s] and right[s]:
         tree_val[left[s]], tree_val[right[s]] = tree_convertor(right[s]), tree_convertor(left[s])
@@ -277,7 +277,7 @@ print(tree_val)
 #         for i in range(2**(n-1),len(tree)):
 #
 #     n += 1
-
+'''
 '''
 tree_idx = [None,1,2,3,4,5,6,7,None,None,None,11,None,None,None,15]
 tree_val = [None,4,1,6,0,2,5,7,None,None,None,3,None,None,None,8]
@@ -327,3 +327,61 @@ LVR_input = [9, 3, 15, 20, 7]
 tree_idx = [1, 2, 3, 4, 5]
 left = [2, ]
 '''
+
+def binary_idx_search(array,target):
+    left = 0
+    right = len(array)-1
+    while left <= right:
+        mid = (left+right)//2
+        # mid = left+(right-left) // 2
+        if array[mid] > target:
+            right = mid - 1
+        elif array[mid] < target:
+            left = mid + 1
+        else:
+            return mid
+    return 'not found'
+
+nums = [-1,0,3,5,9,12]
+target = 9
+# nums.sort()
+print(binary_idx_search(nums,target))
+
+def intersection_of_two(A,B):
+    intersection_group = []
+    for a in A:
+        if a in B:
+            if a not in intersection_group:
+                intersection_group.append(a)
+            else:
+                pass
+        else:
+            pass
+    return intersection_group
+
+def intersection_two_pointer(A,B):
+    intersection_group = []
+    A.sort(); B.sort()
+    a_idx = 0; b_idx = 0
+    while a_idx < len(A) and b_idx < len(B):
+        if A[a_idx] > B[b_idx]:
+            b_idx += 1
+        elif A[a_idx] < B[b_idx]:
+            a_idx += 1
+        else:
+            if A[a_idx] not in intersection_group:
+                intersection_group.append(A[a_idx])
+            a_idx += 1
+            b_idx += 1
+    return intersection_group
+
+nums1 = [4,9,5]
+nums2 = [9,4,8,9,4]
+print(intersection_of_two(nums1,nums2))
+print(intersection_two_pointer(nums1,nums2))
+
+def searchMatrix(matrix, target):
+    return any(target in row for row in matrix)
+
+matrix = [ [1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30] ]
+print(searchMatrix(matrix,5))
