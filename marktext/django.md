@@ -156,8 +156,6 @@
 
 - URLs
 
-
-
 ### Design Pattern
 
 > 소프트웨어도 자주 사용되는 구조와 해결책이 있다.
@@ -186,8 +184,6 @@
     - Template : MVC에서의 View, 레이아웃과 화면 처리, 화면상 사용자 인터페이스 구조와 레이아웃 정의
     
     - View : MVC에서의 Controller, Model & Template과 관련한 로직을 처리해서 응답을 반환하며 클라이언트의 요청에 대해 처리를 분기함
-
-
 
 ### Django Template
 
@@ -231,8 +227,6 @@
     - 한 줄 주석에만 사용할 수 있으며 유효하지 않은 템플릿 코드가 포함될 수 있음
     
     - 여러 줄 주석은 {% comment %}와 {% endcomment %} 사이에 입력
-
-
 
 ### Template inheritance
 
