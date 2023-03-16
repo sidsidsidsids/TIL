@@ -28,7 +28,7 @@ def ripping(lists):
 
         for nz, ny, nx in [[z+1,y,x],[z-1,y,x],[z,y+1,x],[z,y-1,x],[z,y,x+1],[z,y,x-1]]:
             if 0 <= nz < H and 0 <= ny < N and 0 <= nx < M:
-                if V[nz][ny][nx] == 0 and tomato[nz][ny][nx] != -1:
+                if V[nz][ny][nx] == 0 and tomato[nz][ny][nx] == 0:
                     V[nz][ny][nx] = cnt
                     Q.append([nz,ny,nx])
                     new += 1
