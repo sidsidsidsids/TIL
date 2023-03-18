@@ -23,12 +23,16 @@ for i in range(M):
 def finding_passenger(si,sj):
     global fuel
 
+    if [si, sj] in passenger:
+        return [si, sj]
+
     Q = deque()
     Q.append([si,sj])
     V = [ [0]*N for _ in range(N) ]
     old = 1
     new = 0
     V[si][sj] = 1
+    target = []
 
     while Q:
         move = Q.popleft()
@@ -38,7 +42,8 @@ def finding_passenger(si,sj):
             if 0 <= ny < N and 0 <= nx < N:
                 if V[ny][nx] == 0 and grid[ny][nx] != 1:
                     if [ny, nx] in passenger:
-                        return [ny, nx]
+                        target.append([ny, nx])
+                        V[ny][nx] = 1
                     else:
                         Q.append([ny, nx])
                         V[ny][nx] = 1
@@ -48,6 +53,9 @@ def finding_passenger(si,sj):
             old = new
             new = 0
             fuel -= 1
+            if target:
+                target.sort(key=lambda X :(X[0],X[1]))
+                return target[0]
 
         if fuel == 0:
             return False
@@ -61,10 +69,13 @@ def drive_to_goal(si,sj):
     goal[goal_idx] = [-2,-2]
     reward = 0
 
+    if si == goal_i and sj == goal_j:
+        return 0, si, sj
+
     Q = deque()
     Q.append([si, sj])
     V = [[0] * N for _ in range(N)]
-    old = len(Q)
+    old = 1
     new = 0
     V[si][sj] = 1
 
@@ -76,7 +87,8 @@ def drive_to_goal(si,sj):
             if 0 <= ny < N and 0 <= nx < N:
                 if V[ny][nx] == 0 and grid[ny][nx] != 1:
                     if ny == goal_i and nx == goal_j:
-                        return reward+1
+                        fuel -= 1
+                        return reward+1, ny, nx
                     else:
                         Q.append([ny, nx])
                         V[ny][nx] = 1
@@ -92,21 +104,20 @@ def drive_to_goal(si,sj):
             return False
 
 available = 1
-while M:
+for _ in range(M):
     finding = finding_passenger(start_i,start_j)
     if finding:
         drive = drive_to_goal(finding[0],finding[1])
         if drive:
-            fuel += drive
+            fuel += drive[0]*2
+            start_i = drive[1]
+            start_j = drive[2]
         else:
             available = 0
-            M = 0
             break
     else:
         available = 0
-        M = 0
         break
-    M -= 1
 
 if available:
     print(fuel)
