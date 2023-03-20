@@ -415,6 +415,10 @@
       - article.save()
         
         - 인스턴스로 save 메서드 호출
+    
+    - 두번째 방법
+      
+      - Article.objects.create()
   
   - Read 조회
     
@@ -447,3 +451,49 @@
     - 삭제하고자 하는 article 인스턴스 객체 조회 후 반환 값 저장
     
     - delete() 인스턴스 메서드 호출
+
+### Admin site
+
+### CRUD with View
+
+- ```shell
+  $ python manage.py shell
+  Python 3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)] on win32
+  Type "help", "copyright", "credits" or "license" for more information.
+  (InteractiveConsole)
+  >>> from articles.models import Article
+  >>> Article.objects.all()
+  <QuerySet [<Article: 1번째 글 - 1>, <Article: 2번째 글 - 2>, <Article: 3번째 글 - 3>]>
+  >>> exit()       
+  (venv) 
+  SSAFY@DESKTOP-DOGVPUB MINGW64 ~/Desktop/django_p
+  $ py manage.py shell
+  Python 3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)] on win32
+  Type "help", "copyright", "credits" or "license" for more information.
+  (InteractiveConsole)
+  >>> from articles.models import Article
+  >>> article = Article.objects.get(id=2)
+  >>> article
+  <Article: 2번째 글 - 2>
+  >>> Article.objects.create(title='4번', content='4')
+  <Article: 4번째 글 - 4번>
+  >>> Articles.objects.all()
+  Traceback (most recent call last):
+    File "<console>", line 1, in <module>
+  NameError: name 'Articles' is not defined
+  >>> Article.objects.all()
+  <QuerySet [<Article: 1번째 글 - 1>, <Article: 2번째 글 - 2>, <Article: 3번째 글 - 3>, <Article: 4번
+  째 글 - 4번>]>
+  >>> article = Article.objects.get(id=4)
+  >>> article.title = "쉬는시간?"
+  >>> article.save()
+  >>> Article.objects.all()
+  <QuerySet [<Article: 1번째 글 - 1>, <Article: 2번째 글 - 2>, <Article: 3번째 글 - 3>, <Article: 4번
+  째 글 - 쉬는시간?>]>
+  >>> article.delete()
+  (1, {'articles.Article': 1})
+  >>> Article.objects.all()
+  <QuerySet [<Article: 1번째 글 - 1>, <Article: 2번째 글 - 2>, <Article: 3번째 글 - 3>]>
+  ```
+
+- 
