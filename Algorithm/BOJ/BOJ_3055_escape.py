@@ -5,6 +5,92 @@ from collections import deque
 R, C = map(int,input().split())
 grid = [ list(map(str,input())) for _ in range(R) ]
 
+water = []
+for i in range(R):
+    for j in range(C):
+        if grid[i][j] == 'S':
+            start = [i,j]
+        elif grid[i][j] == '*':
+            water.append([i,j])
+
+def escape(dochi,water):
+    d_Q = deque()
+    d_Q.append(dochi)
+    V = [ [0]*C for _ in range(R) ]
+    V[dochi[0]][dochi[1]] = 1
+    old_d = 1
+    new_d = 0
+    cnt = 0
+
+    if water:
+        w_Q = deque()
+        for a,b in water:
+            w_Q.append([a,b])
+            V[a][b] = -1
+        old_w = len(water)
+        new_w = 0
+
+
+        while d_Q:
+            while old_w:
+                elem = w_Q.popleft()
+                y, x = elem[0], elem[1]
+                old_w -= 1
+                for ny, nx in [[y+1,x],[y-1,x],[y,x-1],[y,x+1]]:
+                    if 0<=ny<R and 0<=nx<C and V[ny][nx] == 0:
+                        if grid[ny][nx] != 'D' and grid[ny][nx] != 'X':
+                            V[ny][nx] = -1
+                            w_Q.append([ny,nx])
+                            new_w += 1
+            old_w += new_w
+            new_w = 0
+
+            while old_d:
+                elem = d_Q.popleft()
+                y, x = elem[0], elem[1]
+                old_d -= 1
+                for ny, nx in [[y + 1, x], [y - 1, x], [y, x - 1], [y, x + 1]]:
+                    if 0 <= ny < R and 0 <= nx < C and V[ny][nx] == 0:
+                        if grid[ny][nx] != 'X':
+                            if grid[ny][nx] == 'D':
+                                return cnt + 1
+                            else:
+                                V[ny][nx] = 1
+                                d_Q.append([ny,nx])
+                                new_d += 1
+            old_d += new_d
+            new_d = 0
+            cnt += 1
+
+        return 'KAKTUS'
+
+    else:
+        while d_Q:
+            elem = d_Q.popleft()
+            y, x = elem[0], elem[1]
+            old_d -= 1
+            for ny, nx in [[y + 1, x], [y - 1, x], [y, x - 1], [y, x + 1]]:
+                if 0 <= ny < R and 0 <= nx < C and V[ny][nx] == 0:
+                    if grid[ny][nx] != 'X':
+                        if grid[ny][nx] == 'D':
+                            return cnt + 1
+                        else:
+                            V[ny][nx] = 1
+                            d_Q.append([ny, nx])
+                            new_d += 1
+            if old_d == 0:
+                old_d += new_d
+                new_d = 0
+                cnt += 1
+        return 'KAKTUS'
+
+
+print(escape(start,water))
+
+
+
+
+'''
 visited = [ [0]*C for _ in range(R) ]
 
 for i in range(R):
@@ -63,3 +149,4 @@ def BFS_with_two(a,b,c,d):
     return 'KAKTUS'
 
 print(BFS_with_two(start[0],start[1],water[0],water[1]))
+'''
