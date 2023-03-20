@@ -1,3 +1,7 @@
+import sys
+input = sys.stdin.readline
+from collections import deque
+
 R, C = map(int,input().split())
 grid = [ list(map(str,input())) for _ in range(R) ]
 
@@ -15,8 +19,10 @@ for i in range(R):
             water = [i,j]
 
 def BFS_with_two(a,b,c,d):
-    wQ = [[c,d]]
-    goQ = [[a,b]]
+    wQ = deque()
+    wQ.append([c,d])
+    goQ = deque()
+    goQ.append([a,b])
     visited[c][d] = -1
     visited[a][b] = 1
     oldwQ = 1
@@ -27,7 +33,7 @@ def BFS_with_two(a,b,c,d):
 
     while goQ:
         while oldwQ:
-            wwater = wQ.pop(0)
+            wwater = wQ.popleft()
             y, x = wwater[0], wwater[1]
             oldwQ -= 1
             for ny, nx in [[y+1,x],[y-1,x],[y,x+1],[y,x-1]]:
@@ -39,7 +45,7 @@ def BFS_with_two(a,b,c,d):
         newwQ = 0
 
         while oldgoQ:
-            go = goQ.pop(0)
+            go = goQ.popleft()
             i, j = go[0], go[1]
             oldgoQ -= 1
             for ni, nj in [[i+1,j],[i-1,j],[i,j+1],[i,j-1]]:
