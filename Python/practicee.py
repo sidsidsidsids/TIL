@@ -327,7 +327,7 @@ LVR_input = [9, 3, 15, 20, 7]
 tree_idx = [1, 2, 3, 4, 5]
 left = [2, ]
 '''
-
+'''
 def binary_idx_search(array,target):
     left = 0
     right = len(array)-1
@@ -385,3 +385,27 @@ def searchMatrix(matrix, target):
 
 matrix = [ [1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30] ]
 print(searchMatrix(matrix,5))
+'''
+
+def single_num(inputlist):
+    check = set(inputlist)
+    for elem in check:
+        if inputlist.count(elem) == 1:
+            return elem
+
+print(single_num([2,2,1,4,4]))
+
+def HamDist(a,b):
+    return bin(a^b).count('1')
+
+print(HamDist(1,4))
+
+
+def count_1(binary):
+    cnt = 0
+    for i in binary:
+        if i == '1':
+            cnt += 1
+    return cnt
+
+print(count_1('00000000000000000000000000001011'))
