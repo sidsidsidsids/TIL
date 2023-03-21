@@ -496,4 +496,72 @@
   <QuerySet [<Article: 1번째 글 - 1>, <Article: 2번째 글 - 2>, <Article: 3번째 글 - 3>]>
   ```
 
-- 
+
+
+### Django Form
+
+- Form 클래스를 선언하여 사용
+  
+  - Model과 마찬가지로 상속을 통해 선언 (forms 라이브러리의 Form 클래스 상속)
+  
+  - 앱 폴더에 forms.py 생성 후 ArticleForm Class 선언
+  
+  - as_p(), as_ul(), as_table() 등으로 각 필드를 감쌀 방법 선택
+
+- HTML input 요소 표현
+  
+  - Form fields (ex. form.CharField())
+    
+    - 입력에 대한 유효성 검사 로직을 처리하며 탬플릿에서 직접 사용됨
+  
+  - Widgets (ex.forms.CharField(widget=forms.Textarea))
+    
+    - 웹 페이지의 요소 렌더링을 담당하며 단순 input 요소의 보여지는 부분 변경
+
+### Django ModelForm
+
+
+
+### Static & Media Files
+
+- Static File
+  
+  - 파일 자체가 고정되어 있고 서비스 중에도 추가되거나 변경되지 않는 파일
+
+- Media File
+  
+  - 사용자가 웹에서 업로드하는 정적 파일
+
+- 웹 서버의 기본 동작
+  
+  - 특정 위치(URL)에 있는 자원을 요청(HTTP request)받아 응답(HTTP response)하고 제공하는 것
+  
+  - 이는 자원과 자원에 접근 가능한 주소가 있음을 의미
+    
+    - 예) 사진 파일은 자원이고 해당 사진 파일을 얻기 위한 경로인 웹 주소(URL)가 존재함
+
+- Static file 구성
+  
+  - INSTALLED_APPS에 django.contrib.staticfiles 포함 확인
+  
+  - settungs.py에서 STATIC_URL 정의
+  
+  - 앱의 static 폴더에 정적 파일 위치하기
+  
+  - 템플릿에서 static 템플릿 태그 사용하여 지정된 경로에 있는 정적 파일 URL 만들기
+  
+  - 관련 Settings
+    
+    - STATIC_ROOT
+      
+      - 배포할 때 사용
+    
+    - STATICFILES_DIRS
+      
+      - 추가적인 정적 파일 경로 목록 정의
+    
+    - **STATIC_URL**
+      
+      - URL 경로 지정
+
+- Media file 구성
