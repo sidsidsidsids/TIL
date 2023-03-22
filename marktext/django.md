@@ -496,8 +496,6 @@
   <QuerySet [<Article: 1번째 글 - 1>, <Article: 2번째 글 - 2>, <Article: 3번째 글 - 3>]>
   ```
 
-
-
 ### Django Form
 
 - Form 클래스를 선언하여 사용
@@ -519,8 +517,6 @@
     - 웹 페이지의 요소 렌더링을 담당하며 단순 input 요소의 보여지는 부분 변경
 
 ### Django ModelForm
-
-
 
 ### Static & Media Files
 
@@ -565,3 +561,97 @@
       - URL 경로 지정
 
 - Media file 구성
+
+### 인증과 권한
+
+> 인증 시스템 (Django authentication system)은 인증과 권한 부여를 함께 제공하며 이러한 기능을 일반적으로 인증 시스템이라고 함
+
+- 사전 설정
+
+- DB 초기화(수동)
+  
+  - migrations 파일 삭제
+    
+    - migrations 폴더 및 init.py는 삭제하지 않음
+  
+  - db.sqlite3 삭제
+  
+  - migrations 진행
+    
+    - makemigrations
+    
+    - migrate
+
+- HTTP
+  
+  - 특징
+    
+    - 비 연결 지향
+      
+      - 서버는 요청에 대한 응답을 보낸 후 연결을 끊음
+        
+        - ex) 네이버 메인 페이지를 보고 있을 때 네이버 서버와 연결되있지 않음
+        
+        - 네이버 서버는 우리에게 메인 페이지를 응답하고 연결을 끊은 것
+    
+    - 무상태
+      
+      - 연결을 끊는 순간 클라이언트와 서버 간 통신이 끝나며 상태 정보 유지 X
+    
+    - 서버와 지속적 연결을 위해 쿠키와 세션 존재
+  
+  - 쿠키
+    
+    - HTTP 쿠키는 상태가 있는 세션을 만들도록 해 줌
+    
+    - 두 요청이 동일한 브라우저에서 들어왔는지 아닌지를 판단할 때 사용
+      
+      - 이를 이용해 로그인 상태 유지 가능(무상태 HTTP 프로토콜에서 상태 정보를 기억 시켜 주기 때문)
+    
+    - 수명
+      
+      - session cookie
+        
+        - 현재 세션이 종료되면 삭제됨(브라우저 종료와 함께 삭제됨)
+      
+      - persistent cookie
+        
+        - 지정된 기간이 지나면 삭제됨
+  
+  - 세션
+    
+    - 사이트와 특정 브라우저 사이의 상태를 유지시키는 것
+    
+    - 클라이언트가 서버에 접속하면 서버가 특정 **session id**를 발급하고 클라이언트는 이를 쿠키에 저장
+      
+      - 클라이언트가 다시 동일 서버에 접속하면 요청과 함께 쿠키를 서버에 전달
+      
+      - 서버에서 session id를 확인해 알맞은 로직을 처리
+    
+    - 세션을 구별하기 위해 session id 필요
+  
+  - 로그인
+    
+    - Session을 create하는 과정
+    
+    - AuthenticationForm
+      
+      - 로그인을 위한 built-in form
+      
+      - request를 첫번째 인자로 취함
+    
+    - ```python
+      from django.contrib.auth import login as auth_login
+      ```
+  
+  - 로그아웃
+    
+    - Session을 delete하는 과정
+      
+      - 현재 요청에 대한 session data를 DB에서 삭제
+      
+      - 클라이언트 쿠키에서 session ID 삭제
+    
+    - ```python
+      from django.contrib.auth import logout as auth_logout
+      ```

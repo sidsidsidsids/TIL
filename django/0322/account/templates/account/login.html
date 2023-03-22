@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if user.is_authenticated %}
+  <h1>이미 로그인</h1>
+  {% else %}
+  <h1>로그인</h1>
+  <form action="{% url 'account:login' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+
+  </form>
+  {% endif %}
+{% endblock content %}
+
