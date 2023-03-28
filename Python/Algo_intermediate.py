@@ -31,7 +31,7 @@ used =[0]*3
 perm(0,3)
 '''
 
-#'''
+'''
 # 부분집합
 
 arr = [3,6,7,1,5,4]
@@ -56,31 +56,47 @@ A = [7, 2, 5, 4, 6]
 N = len(A)
 bit = [0] * N
 f(0, N)
-#'''
 '''
+#'''
 # 조합
-N = 10
-cnt=0
-for i in range(N-(3-1)):
-    for j in range(i+1, N-1):
-        for k in range(j+1, N):
-            print(i, j, k)
-            cnt+=1
-print(cnt)
+# N = 10
+# cnt=0
+# for i in range(N-(3-1)):
+#     for j in range(i+1, N-1):
+#         for k in range(j+1, N):
+#             print(i, j, k)
+#             cnt+=1
+# print(cnt)
 
-n = 5
-r = 3
-comb = [0] * 3
-A = [i for i in range(n)]
+# n = 5
+# r = 3
+# comb = [0] * 3
+# A = [i for i in range(n)]
 
-def nCr(n, r, s): # n개에서 r개를 고르는 조합, s는 시작할 인덱스
+# def nCr(n, r, s): # n개에서 r개를 고르는 조합, s는 시작할 인덱스
+#     if r == 0:
+#         print(*reversed(comb))
+#     else:
+#         for i in range(s, n-r+1):
+#             comb[r-1] = A[i]
+#             print(comb, end=' ')
+#             nCr(n, r-1, i+1)
+
+# nCr(n, r, 0)
+#'''
+n, r = input().split()
+n = int(n)
+r = int(r)
+
+comb = [0] * r
+A = [i+1 for i in range(n)]
+
+def nCr(n, r, s):
     if r == 0:
-        print(comb)
+        print(*reversed(comb))
     else:
         for i in range(s, n-r+1):
             comb[r-1] = A[i]
-            print(comb, r, end=' ')
             nCr(n, r-1, i+1)
 
 nCr(n, r, 0)
-'''
