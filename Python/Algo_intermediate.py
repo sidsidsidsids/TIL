@@ -1,5 +1,7 @@
 
 '''
+#순열
+
 def perm(i, k): # i : 값을 결정할 자리, k : 결정할 개수
     if i == k:
         print(*p)
@@ -11,7 +13,7 @@ def perm(i, k): # i : 값을 결정할 자리, k : 결정할 개수
 
 p = [1,2,3]
 perm(0,3)
-'''
+
 def perm(i,k):
     if i == k:
         print(*p)
@@ -27,3 +29,58 @@ A = [1,4,5]
 p = [0]*3
 used =[0]*3
 perm(0,3)
+'''
+
+#'''
+# 부분집합
+
+arr = [3,6,7,1,5,4]
+n = len(arr)
+
+for i in range(0,(1<<n)): # range(0,64) n=6이므로 1<<n = 2^6, 000000~111111의 경우 모두 확인
+    for j in range(0,n): # 각 인덱스마다 해당 원소가 부분집합에 들어갈지 말지
+        if i & (1<<j): # & : And 연산, 비트가 0이면 0, 1이면 != 0
+            print('%d'%arr[j], end=' ')
+    print()
+
+def f(i,k): #bit[i]를 결정하는 함수
+    if i==k:
+        print(*bit)
+    else:
+        bit[i] = 0
+        f(i+1, k)
+        bit[i] = 1
+        f(i+1, k)
+
+A = [7, 2, 5, 4, 6]
+N = len(A)
+bit = [0] * N
+f(0, N)
+#'''
+'''
+# 조합
+N = 10
+cnt=0
+for i in range(N-(3-1)):
+    for j in range(i+1, N-1):
+        for k in range(j+1, N):
+            print(i, j, k)
+            cnt+=1
+print(cnt)
+
+n = 5
+r = 3
+comb = [0] * 3
+A = [i for i in range(n)]
+
+def nCr(n, r, s): # n개에서 r개를 고르는 조합, s는 시작할 인덱스
+    if r == 0:
+        print(comb)
+    else:
+        for i in range(s, n-r+1):
+            comb[r-1] = A[i]
+            print(comb, r, end=' ')
+            nCr(n, r-1, i+1)
+
+nCr(n, r, 0)
+'''
