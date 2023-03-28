@@ -386,7 +386,7 @@ def searchMatrix(matrix, target):
 matrix = [ [1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30] ]
 print(searchMatrix(matrix,5))
 '''
-
+'''
 def single_num(inputlist):
     check = set(inputlist)
     for elem in check:
@@ -409,3 +409,82 @@ def count_1(binary):
     return cnt
 
 print(count_1('00000000000000000000000000001011'))
+'''
+
+def sliding_window(L,k):
+    left = 0
+    right = k
+    result = list()
+    while right <= len(L):
+        result.append(max(L[left:right]))
+        left += 1
+        right += 1
+    return result
+
+nums = [1,3,-1,-3,5,3,6,7]
+k = 3
+print(sliding_window(nums,k)) # [3, 3, 5, 5, 6, 7]
+
+def longest_string(word, change):
+    maxima = 0
+    cnt = 0
+    chance = 0
+    chance += change
+
+    for i in range(len(word) - 1):
+        j = 1
+        while True:
+            if word[i] == word[i+j]:
+                cnt += 1
+                j += 1
+                if i+j >= len(word):
+                    if maxima < cnt+1:
+                        maxima = cnt+1
+                    break
+            else:
+                if chance:
+                    chance -= 1
+                    cnt += 1
+                    j += 1
+                    if i + j >= len(word):
+                        if maxima < cnt+1:
+                            maxima = cnt+1
+                        break
+                else:
+                    if maxima < cnt + 1:
+                        maxima = cnt + 1
+                    chance += change
+                    break
+        if j == 0:
+            break
+        cnt = 0
+
+    return maxima
+
+s = "AAABBC"
+k = 2
+print(longest_string(s,k)) # 5
+
+def cookie(children,cookies):
+    children.sort()
+    cookies.sort()
+
+    i_idx = 0
+    c_idx = 0
+
+    possible = 0
+
+    while c_idx < len(cookies):
+        if children[i_idx] <= cookies[c_idx]:
+            possible += 1
+            c_idx += 1
+            i_idx += 1
+            if i_idx >= len(children):
+                break
+        else:
+            c_idx += 1
+
+    return possible
+
+print(cookie([1,2,3],[1,1])) # 1
+print(cookie([1,2],[1,2,3])) # 2
