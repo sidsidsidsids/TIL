@@ -155,6 +155,7 @@ for t in range(1, T+1):
     msort(0,N-1)
     print(arr)
 '''
+'''
 # 퀵 정렬
 def hoare(A, l, r):
     pivot = A[l] # 피봇을 맨 왼쪽 원소로
@@ -185,3 +186,28 @@ for tc in range(1,T+1):
     arr = list(map(int,input().split()))
     qsort(arr,0,n-1)
     print(*arr)
+'''
+# subset에서 key값 찾기 (부분집합)
+def f(i,k,s,key, rs): # 시작 idx, 끝 idx, 현재 sum, 목표값, 오른쪽 나머지들의 sum
+    global cnt
+    global c
+    c += 1
+    if s == key:
+        cnt += 1
+        return
+    elif i == k or s > key or s+rs < key:
+        return
+    else:
+        bit[i] = 0
+        f(i+1, k, s, key, rs - A[i])
+        bit[i] = 1
+        f(i+1, k, s+A[i], key, rs - A[i])
+
+A = [i for i in range(1,11)]
+N = 10
+key = 42
+cnt = 0
+c = 0
+bit = [0] * N
+f(0, N, 0, key, sum(A))
+print(cnt, c)
