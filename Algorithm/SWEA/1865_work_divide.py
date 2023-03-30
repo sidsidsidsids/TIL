@@ -1,25 +1,18 @@
-def f(i,k,j_s):
+def f(i,k,j_s,v):
     global ans
-
+    if v <= ans:
+        return
     if i == k:
-        total = 0
-        for c in choose:
-            if total:
-                total *= c/100
-            else:
-                total += c/100
-        total *= 100
-        if ans < total:
-            ans = round(total,6)
+        if ans < v:
+            ans = v
 
     else:
         for j in range(n):
             if j_s[j]:
                 if work[i][j]:
-                    choose[i] = work[i][j]
                     j_s[j] = 0
-                    f(i+1,k,j_s)
-                    choose[i] = 0
+                    nv = v * (work[i][j] / 100)
+                    f(i+1,k,j_s,nv)
                     j_s[j] = 1
 
 
@@ -28,10 +21,11 @@ for tc in range(1,1+t):
     n = int(input())
     work = [ list(map(int,input().split())) for _ in range(n) ]
 
-    choose = [0] * n
     ans = 0
     j_list = [1] * n
 
-    f(0,n,j_list)
+    f(0,n,j_list,1)
 
-    print(f'#{tc} {ans}')
+    ans = round(ans * 100, 6)
+
+    print(f'#{tc} {ans:0.6f}')
