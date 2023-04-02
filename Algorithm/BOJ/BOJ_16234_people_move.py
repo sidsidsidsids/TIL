@@ -7,27 +7,37 @@ world = [ list(map(int,input().split())) for _ in range(N) ]
 
 def target(i,j,grid):
     global duplicate
-    Q = deque()
-    Q.append([i,j])
-    result = []
-    V = [ [0]*N for _ in range(N) ]
-    V[i][j] = 1
 
-    while Q:
-        elem = Q.popleft()
-        y, x = elem[0], elem[1]
-        for ni, nj in [[y-1,x],[y,x+1],[y+1,x],[y,x-1]]:
-            if 0 <= ni < N and 0 <= nj < N and V[ni][nj] == 0:
-                if L <= abs(grid[y][x] - grid[ni][nj]) <= R:
-                    Q.append([ni,nj])
-                    duplicate.append([ni,nj])
-                    V[ni][nj] = 1
-                    if not result:
-                        result.append([i,j])
-                    result.append([ni,nj])
-    if result:
-        result.sort(key = lambda X:(X[0],X[1]))
-    return result
+    search = False
+
+    for ni, nj in [[i - 1, j], [i, j + 1], [i + 1, j], [i, j - 1]]:
+        if 0 <= ni < N and 0 <= nj < N and L <= abs(grid[i][j] - grid[ni][nj]) <= R:
+            search = True
+
+    if search:
+        Q = deque()
+        Q.append([i,j])
+        result = []
+        V = [ [0]*N for _ in range(N) ]
+        V[i][j] = 1
+
+        while Q:
+            elem = Q.popleft()
+            y, x = elem[0], elem[1]
+            for ni, nj in [[y-1,x],[y,x+1],[y+1,x],[y,x-1]]:
+                if 0 <= ni < N and 0 <= nj < N and V[ni][nj] == 0:
+                    if L <= abs(grid[y][x] - grid[ni][nj]) <= R:
+                        Q.append([ni,nj])
+                        duplicate.append([ni,nj])
+                        V[ni][nj] = 1
+                        if not result:
+                            result.append([i,j])
+                        result.append([ni,nj])
+        if result:
+            result.sort(key = lambda X:(X[0],X[1]))
+        return result
+    else:
+        return False
 
 def union_move(countriess):
     for countries in countriess:
