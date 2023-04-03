@@ -410,7 +410,7 @@ def count_1(binary):
 
 print(count_1('00000000000000000000000000001011'))
 '''
-
+'''
 def sliding_window(L,k):
     left = 0
     right = k
@@ -488,3 +488,28 @@ def cookie(children,cookies):
 
 print(cookie([1,2,3],[1,1])) # 1
 print(cookie([1,2],[1,2,3])) # 2
+'''
+import collections
+def much_elem(elem_list):
+    counts = collections.defaultdict(int)
+    for elem in elem_list:
+        if counts[elem] == 0:
+            counts[elem] = elem_list.count(elem)
+
+        if counts[elem] > len(elem_list) // 2:
+            return elem
+
+print(much_elem([3,2,3])) # 3
+print(much_elem([2,2,1,1,1,2,2])) # 2
+
+import numpy
+
+def fibo(n):
+    M = numpy.matrix([[0,1],[1,1]])
+    print(M ** n)
+    vec = numpy.array([[0],[1]])
+    print(vec)
+    print(numpy.matmul(M ** n, vec))
+    return numpy.matmul(M ** n, vec)[0]
+
+print(fibo(4)) # 3
