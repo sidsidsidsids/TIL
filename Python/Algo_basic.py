@@ -185,14 +185,14 @@ adjM = [[0] * (V+1) for _ in range(V+1)]
 adjL = [[] for _ in range(V+1)]
 
 visited = [0] * (V+1)
-
 for i in range(E):
     v1, v2 = arr[i*2], arr[i*2+1]
     adjM[v1][v2] = 1
     adjM[v2][v1] = 1 # v1과 v2는 인접해있다
-    
+
     adjL[v1].append(v2)
     adjL[v2].append(v1)
+print()
 
 def dfs(v):
     visited[v] = 1
@@ -201,6 +201,7 @@ def dfs(v):
     for w in range(1, V+1):
         if adjM[v][w] == 1 and visited[w] == 0:
             dfs(w)
+dfs(1)
 '''
 '''
 #입력값 V, E / arr
