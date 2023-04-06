@@ -2,7 +2,7 @@ from collections import deque
 import sys
 input = sys.stdin.readline
 
-m, n = map(int,input().split())
+mm, nn = map(int,input().split())
 b = int(input())
 bus = [ [] for _ in range(b+1) ]
 
@@ -15,78 +15,88 @@ for _ in range(b):
     bus[i] = [[sx,sy],[ex,ey]]
 
 start_x, start_y, end_x, end_y = map(int,input().split())
-if start_x > end_x:
-    start_x, end_x = end_x, start_x
-if start_y > end_y:
-    start_y, end_y = end_y, start_y
+# if start_x > end_x:
+#     start_x, end_x = end_x, start_x
+# if start_y > end_y:
+#     start_y, end_y = end_y, start_y
 
 def hwanseung(idx):
 
     next = []
 
-    if bus[idx][0][0] == bus[idx][1][0]: # 세로 버스일 때
+    if bus[idx][0][0] == bus[idx][1][0]: # idx가 세로 버스일 때
         for n in range(1,b+1):
             if idx != n:
-                # 가로 버스
+                # n이 가로 버스
                 if bus[n][0][1] == bus[n][1][1]:
-                    if bus[n][0][0] <= bus[idx][0][0] and bus[idx][0][0] <= bus[n][1][0] and bus[idx][0][1] <= bus[n][0][1] <= bus[idx][1][1]:
+                    # n 버스의 세로 위치가 idx 버스의 세로 범위 안이고 idx 버스의 가로 위치가 n 버스의 가로 범위 안
+                    if bus[n][0][0] <= bus[idx][0][0] <= bus[n][1][0] and bus[idx][0][1] <= bus[n][0][1] <= bus[idx][1][1]:
                         next.append(n)
-                # 세로 버스
+                # n이 세로 버스
                 elif bus[n][0][0] == bus[n][1][0]:
-                    if (bus[idx][0][1] <= bus[n][0][1] <= bus[idx][1][1] and bus[idx][1][1] < bus[n][1][1]) or (bus[n][0][1] < bus[idx][0][1] and bus[idx][0][1] <= bus[n][1][1] <= bus[idx][1][1]):
-                        next.append(n)
+                    # 범위가 서로 맞물릴 때
+                    if bus[n][0][0] == bus[idx][0][0]:
+                        if (bus[n][0][1] <= bus[idx][1][1] and bus[idx][1][1] < bus[n][1][1]) or (bus[n][0][1] < bus[idx][0][1] and bus[idx][0][1] <= bus[n][1][1]):
+                            next.append(n)
 
-    else: # 가로 버스일 때
+    else: # idx가 가로 버스일 때
         for n in range(1,b+1):
             if idx != n:
-                # 가로 버스
+                # n이 가로 버스
                 if bus[n][0][1] == bus[n][1][1]:
-                    if (bus[idx][0][0] <= bus[n][0][0] <= bus[idx][1][0] and bus[idx][1][0] < bus[n][1][0]) or (bus[n][0][0] < bus[idx][0][0] and bus[idx][0][0] <= bus[n][1][0] <= bus[idx][1][0]):
-                        next.append(n)
-                # 세로 버스
+                    # 범위가 서로 맞물릴 때
+                    if bus[n][0][1] == bus[idx][0][1]:
+                        if (bus[n][0][0] <= bus[idx][1][0] and bus[idx][1][0] < bus[n][1][0]) or (bus[n][0][0] < bus[idx][0][0] and bus[idx][0][0] <= bus[n][1][0]):
+                            next.append(n)
+                # n이 세로 버스
                 elif bus[n][0][0] == bus[n][1][0]:
-                    if bus[n][0][1] <= bus[idx][0][1] and bus[idx][0][1] <= bus[n][1][1] and bus[idx][0][0] <= bus[n][0][0] <= bus[idx][1][0]:
+                    # n 버스의 가로 위치가 idx 버스의 가로 범위 안이고 idx 버스의 세로 위치가 n 버스의 세로 범위 안
+                    if bus[n][0][1] <= bus[idx][0][1] <= bus[n][1][1] and bus[idx][0][0] <= bus[n][0][0] <= bus[idx][1][0]:
                         next.append(n)
 
     return next
-
-
-
 
 def BFS(indexes):
     Q = deque()
     V = [0] * (b+1)
     for index in indexes:
         Q.append(index)
+        if bus[index][0][0] <= end_x <= bus[index][1][0] and bus[index][0][1] <= end_y <= bus[index][1][1]:
+            return 1
         V[index] = 1
 
     old = len(indexes)
     new = 0
-    cnt = 0
+    cnt = 1
+    #print(Q)
 
     while Q:
         elem = Q.popleft()
         old -= 1
-        next = hwanseung(elem)
-        for nex in next:
+        nexte = hwanseung(elem)
+        #print(next)
+        for nex in nexte:
             if bus[nex][0][0] <= end_x <= bus[nex][1][0] and bus[nex][0][1] <= end_y <= bus[nex][1][1]:
+                #print(elem, 'goal to', nex)
                 cnt += 1
                 return cnt
             if not V[nex]:
+                #print(elem, 'to', nex)
                 Q.append(nex)
                 new += 1
                 V[nex] = 1
 
-    if old == 0:
-        old += new
-        new = 0
-        cnt += 1
+        if old == 0:
+            #print(Q)
+            old += new
+            new = 0
+            cnt += 1
 
 start = []
 for q in range(1,b+1):
     if bus[q][0][0] <= start_x <= bus[q][1][0] and bus[q][0][1] <= start_y <= bus[q][1][1]:
         start.append(q)
-
+#print(start)
 print(BFS(start))
 
 
