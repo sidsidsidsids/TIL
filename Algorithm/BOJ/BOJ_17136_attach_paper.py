@@ -5,20 +5,27 @@ from collections import deque
 
 grid = [ list(map(int,input().split())) for _ in range(10) ]
 
-board = [0, 0, 0, 0, 0]
-ans = 26
+s_board = [0, 0, 0, 0, 0]
 V = [ [0]*10 for _ in range(10) ]
+tmp_min = 0
+tmp_board = []
+tmp_paper = []
 
-def attach(cnt):
+def attach(cnt,board,gridd):
     for i in range(10):
         for j in range(10):
-            if grid[i][j] == 1:
-                able = DFS(i,j)
-                cnt += able
-
+            if gridd[i][j] == 1:
+                DFS(i,j,board,gridd)
+                cnt += tmp_min
+                board = tmp_board
+                gridd = tmp_paper
     return cnt
 
-def DFS(i,j,board):
+def DFS(i,j,score,gride):
+    global tmp_min
+    global tmp_board
+    global tmp_paper
+
     field_1 = [[i,j]]
     D = deque()
     D.append([i,j])
@@ -30,34 +37,75 @@ def DFS(i,j,board):
         y, x = elem[0], elem[1]
         for ny, nx in [[y-1,x],[y,x+1],[y+1,x],[y,x-1]]:
             if 0 <= ny < 9 and 0 <= nx < 9:
-                if not V[nx][ny] and grid[nx][ny] == 1:
+                if not V[ny][nx] and grid[ny][nx] == 1:
                     D.append([ny,nx])
                     V[ny][nx] = 1
                     field_1.append([ny,nx])
+
+    tmp_min = 26
+    tmp_board = []
+    tmp_paper = []
+
+    target_len = len(field_1)
+    init_len = 0
+    way_cnt = 0
+    size = 1
+    attaching(field_1, init_len, target_len, size, way_cnt, score, gride)
+    return
 '''
 p_list 말고 len으로 받기 -> 거기에 따른 인덱스로 구하기
 '''
-def attaching(p_list, paper, p_board, cnt):
-    for [y, x] in p_list:
-        for k in range(4,-1,-1):
+def attaching(dotlist,s,e,k,cnt,scoreboard,paper):
+    global tmp_min
+    global tmp_board
+    global tmp_paper
+    if k > 5:
+        return
+    if cnt > tmp_min:
+        return
+    if s==e:
+        if cnt < tmp_min:
+            tmp_min = cnt
+            tmp_board = scoreboard
+            tmp_paper = paper
+            return
+        return
+    else:
+        y, x = dotlist[s][0], dotlist[s][1]
+        print(y,x)
+        if paper[y][x] == 1:
             able = True
             for ky in range(k):
-                if not able:
+                if y+ky > 9 or not able:
                     break
                 for kx in range(k):
-                    if y + ky > 9 or x + kx > 9:
-                        able = False
-                        break
-                    if paper[y+ky][x+kx] == 0:
+                    if x+kx > 9 or paper[y+ky][x+kx] == 0:
                         able = False
                         break
             if able:
-                for kky in range(y,y+k):
-                    for kkx in range(x, x+k):
-                        paper[kky][kkx] = 0
-                p_board[k] += 1
+                for ny in range(k):
+                    for nx in range(k):
+                        paper[y+ny][x+nx] = 0
+                scoreboard[k-1] += 1
                 cnt += 1
-                attaching()
+                if scoreboard[k-1] > 5:
+                    return
+                else:
+                    attaching(dotlist,s+1,e,k+1,cnt,scoreboard,paper)
+                    for ny in range(k):
+                        for nx in range(k):
+                            paper[y + ny][x + nx] = 0
+                    scoreboard[k - 1] -= 1
+                    cnt -= 1
+            else:
+                return
+        else:
+            attaching(dotlist,s+1,e,1,cnt,scoreboard,paper)
+
+ans = attach(0,s_board,grid)
+print(ans)
+
+
 
 
 
