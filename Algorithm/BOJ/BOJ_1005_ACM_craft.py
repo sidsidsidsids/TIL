@@ -11,7 +11,6 @@ for tc in range(t):
     win = int(input())
 
     # 가능 건물 짓기
-    print()
     result = [0] * N
     find = 0
     total = 0
@@ -36,7 +35,7 @@ for tc in range(t):
 
         if save:
             for elem in save:
-                able.append(save)
+                able.append(elem)
             save = []
 
         built = 100000
