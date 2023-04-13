@@ -655,3 +655,101 @@
     - ```python
       from django.contrib.auth import logout as auth_logout
       ```
+
+
+
+### REST API
+
+- HTTP (REMIND)
+  
+  - HTML 문서와 같은 리소스들을 가져올 수 있도록 하는 프로토콜
+  
+  - 웹에서 이루어지는 모든 데이터 교환의 기초
+  
+  - Stateless (무상태)
+  
+  - HTTP Method
+    
+    - GET, POST, PUT, DELETE ...
+  
+  - HTTP response status codes
+    
+    - 100-199
+    
+    - 200-299 정상
+    
+    - 300-399
+    
+    - 400-499 클라이언트 에러
+    
+    - 500-599 서버 에러
+
+- URI (REMIND)
+  
+  - Uniform Resource Identifier (통합 자원 식별자), 인터넷에서 리소스를 식별하는 문자열
+  
+  - 가장 일반적인 URI는 URL
+    
+    - 통합 자원 위치
+    
+    - 웹에서 주어진 리소스의 주소
+    
+    - URL 구조
+      
+      - Scheme(or protocol) : 브라우저가 리소스를 요청할 때 사용하는 프로토콜
+      
+      - Authority : 권한
+        
+        - Domain Name : 요청 중인 웹 서버를 나타냄
+        
+        - Port : 웹 서버 리소스에 접근하는데 사용되는 기술적인 게이트
+        
+        - Path : 웹 서버 리소스 경로
+  
+  - 특정 이름공간에서 이름으로 리소스를 식별하는 URI는 URN (통합 자원 이름)
+
+- API (Application Programming Interface)
+  
+  - 어플리케이션과 프로그래밍으로 소통하는 방법
+    
+    - 개발자가 복잡한 기능을 보다 쉽게 만들 수 있도록 프로그래밍 언어로 제공되는 구성
+  
+  - Web API
+    
+    - 웹 서버 또는 웹 브라우저를 위한 API
+    
+    - 현재 웹 개발은 여러 Open API를 활용중
+    
+    - 대표적인 Third Party Open API
+      
+      - Youtube API
+      
+      - Naver Papago API
+      
+      - Kakao Map API
+    
+    - 다양한 타입의 데이터를 응답함 (HTML, XML, JSON 등)
+
+- REST (Representational State Transfer)
+  
+  - API 서버를 개발하기 위한 일종의 소프트웨어 설계 방법론
+  
+  - REST 원리를 따르는 시스템을 RESTful 하다고 부름
+  
+  - **자원을 정의하고 자원에 대한 주소를 지정하는 전반적인 방법을 서술**
+  
+  - 자원을 정의하고 주소를 지정하는 방법
+    
+    - 식별 : URI
+    
+    - 행위 : HTTP Method
+    
+    - 표현 : 자원과 행위를 통해 궁극적으로 표현(추상화)된 결과물
+      
+      - JSON으로 표현된 데이터 제공
+
+- JSON (JavaScript Object Notation)
+  
+  - 파이썬의 dictionary, 자바스크립트의 object처럼 C계열 언어가 갖고 있는 자료구조로 쉽게 변환할 수 있는 **key-value 형태의 구조**를 갖고있음
+  
+  - 읽고 쓰기 쉽고 기계가 파싱(해싱 & 분석)하고 만들어내기 쉬워 현재 API에서 가장 많이 사용하는 데이터 타입
