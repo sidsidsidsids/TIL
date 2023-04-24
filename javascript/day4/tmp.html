@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>
+    <div>
+      <a></a>
+    </div>
+  </h1>
+  <script>
+    const aTag = document.createElement('a')
+    aTag.innerText = 'SSAFY'
+
+    aTag.setAttribute('href','https://www.ssafy.com')
+    console.log(aTag.getAttribute('href'))
+
+    // function preventClick(e){
+    //   e.preventDefault()
+    // }
+
+    const div = document.querySelector('div')
+    div.appendChild(aTag)
+
+    const h1 = document.querySelector('h1')
+    console.log(h1.classList)
+  </script>
+</body>
+</html>
