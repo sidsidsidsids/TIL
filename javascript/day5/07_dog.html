@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>개</button>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const dogImageSearchURL = 'https://dog.ceo/api/breeds/image/random'
+    const dogBtn = document.querySelector('button')
+
+    // 버튼을 누를 때 마다 강아지 사진
+    dogBtn.addEventListener('click', function() {
+      axios({
+        method: 'get',
+        url: dogImageSearchURL,
+      })
+      .then((response) => {
+        console.log(1)
+        console.log(response.data.message)
+        const imgSrc = response.data.message
+        return imgSrc
+      })
+      .then((imgSrc) => {
+        console.log(2)
+        const imgTag = document.createElement('img')
+        imgTag.setAttribute('src', imgSrc)
+        document.body.appendChild(imgTag)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    })
+  </script>
+</body>
+</html>
