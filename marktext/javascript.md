@@ -83,3 +83,9 @@
 - then, catch는 모두 항상 promise 객체를 반환하여 chaining 할 수 있음
   
   - axios로 처리한 비동기 로직이 항상 promise 객체를 반환
+
+### AJAX
+
+> 비동기식 JavaScript와 XML, 비동기 통신 웹 개발 기술
+> 
+> 특징으로는 페이지 새로고침 없이 서버에 요청하며 서버로부터 응답 받아 작업을 수행한다
