@@ -13,3 +13,5 @@
 - [Django](https://github.com/sidsidsidsids/TIL/tree/master/django)
 
 - [Database](https://github.com/sidsidsidsids/TIL/tree/master/database)
+
+- [Javascript](https://github.com/sidsidsidsids/TIL/tree/master/javascript)
