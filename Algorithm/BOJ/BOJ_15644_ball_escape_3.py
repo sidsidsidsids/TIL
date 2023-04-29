@@ -16,7 +16,7 @@ for i in range(N):
         elif board[i][j] == 'O':
             goal = [i,j]
 
-def move_left(Ry,Rx,By,Bx,fail,success):
+def move_left(Ry,Rx,By,Bx,fail,success,memo):
     if Rx <= Bx:
         while board[Ry][Rx-1] != '#':
             Rx -= 1
@@ -47,9 +47,9 @@ def move_left(Ry,Rx,By,Bx,fail,success):
                 Ry = 0
                 success = True
                 break
-    return [Ry,Rx,By,Bx,fail,success]
+    return [Ry,Rx,By,Bx,fail,success,memo+'L']
 
-def move_right(Ry,Rx,By,Bx,fail,success):
+def move_right(Ry,Rx,By,Bx,fail,success,memo):
     if Bx <= Rx:
         while board[Ry][Rx+1] != '#':
             Rx += 1
@@ -80,9 +80,9 @@ def move_right(Ry,Rx,By,Bx,fail,success):
                 Ry = 0
                 success = True
                 break
-    return [Ry,Rx,By,Bx,fail,success]
+    return [Ry,Rx,By,Bx,fail,success,memo+'R']
 
-def move_top(Ry,Rx,By,Bx,fail,success):
+def move_top(Ry,Rx,By,Bx,fail,success,memo):
     if By >= Ry:
         while board[Ry-1][Rx] != '#':
             Ry -= 1
@@ -112,9 +112,9 @@ def move_top(Ry,Rx,By,Bx,fail,success):
                 Ry = 0
                 success = True
                 break
-    return [Ry,Rx,By,Bx,fail,success]
+    return [Ry,Rx,By,Bx,fail,success,memo+'U']
 
-def move_down(Ry,Rx,By,Bx,fail,success):
+def move_down(Ry,Rx,By,Bx,fail,success,memo):
     if Ry >= By:
         while board[Ry+1][Rx] != '#':
             Ry += 1
@@ -145,11 +145,11 @@ def move_down(Ry,Rx,By,Bx,fail,success):
                 Ry = 0
                 success = True
                 break
-    return [Ry,Rx,By,Bx,fail,success]
+    return [Ry,Rx,By,Bx,fail,success,memo+'D']
 
-def BFS(red_y,red_x,blue_y,blue_x,failure,succession):
+def BFS(red_y,red_x,blue_y,blue_x,failure,succession,memory):
     Q = deque()
-    Q.append([red_y, red_x, blue_y, blue_x, False, False])
+    Q.append([red_y, red_x, blue_y, blue_x, False, False, memory])
 
     visit = [[0] * M for _ in range(N)]
     visit[red_y][red_x] = 1
@@ -161,17 +161,17 @@ def BFS(red_y,red_x,blue_y,blue_x,failure,succession):
 
     while Q:
         elem = Q.popleft()
-        r_ny, r_nx, b_ny, b_nx, nf, ns = elem[0], elem[1], elem[2], elem[3], elem[4], elem[5]
+        r_ny, r_nx, b_ny, b_nx, nf, ns, m = elem[0], elem[1], elem[2], elem[3], elem[4], elem[5], elem[6]
         old -= 1
-        for ry, rx, by, bx, nfail, nsuccess in [move_down(r_ny,r_nx,b_ny,b_nx, nf, ns),move_top(r_ny,r_nx,b_ny,b_nx, nf, ns),move_left(r_ny,r_nx,b_ny,b_nx, nf, ns),move_right(r_ny,r_nx,b_ny,b_nx, nf, ns)]:
+        for ry, rx, by, bx, nfail, nsuccess, nm in [move_down(r_ny,r_nx,b_ny,b_nx, nf, ns, m),move_top(r_ny,r_nx,b_ny,b_nx, nf, ns, m),move_left(r_ny,r_nx,b_ny,b_nx, nf, ns, m),move_right(r_ny,r_nx,b_ny,b_nx, nf, ns, m)]:
             # print('elem: ', [ry, rx, by, bx, nfail, nsuccess], cnt)
             if nsuccess and not nfail:
                 # print('finish: ', [ry, rx, by, bx, nfail, nsuccess])
-                return cnt + 1
+                return [cnt + 1, nm]
             else:
                 if visit[ry][rx] < 1000 and not nfail:
                     # print('appendQ: ', [ry, rx, by, bx, nfail, nsuccess], cnt+1)
-                    Q.append([ry, rx, by, bx, nfail, nsuccess])
+                    Q.append([ry, rx, by, bx, nfail, nsuccess, nm])
                     visit[ry][rx] += 1
                     new += 1
 
@@ -185,5 +185,10 @@ def BFS(red_y,red_x,blue_y,blue_x,failure,succession):
     # print('emptyQ')
     return -1
 
-print(BFS(R_init[0],R_init[1],B_init[0],B_init[1],False,False))
-# print(BFS(3,5,6,6,False,False))
+result = BFS(R_init[0],R_init[1],B_init[0],B_init[1],False,False,'')
+
+if result == -1:
+    print(result)
+else:
+    print(result[0])
+    print(result[1])

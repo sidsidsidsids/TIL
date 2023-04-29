@@ -169,7 +169,7 @@ def BFS(red_y,red_x,blue_y,blue_x,failure,succession):
                 # print('finish: ', [ry, rx, by, bx, nfail, nsuccess])
                 return cnt + 1
             else:
-                if visit[ry][rx] < 1000 and not nfail:
+                if visit[ry][rx] < 100000 and not nfail:
                     # print('appendQ: ', [ry, rx, by, bx, nfail, nsuccess], cnt+1)
                     Q.append([ry, rx, by, bx, nfail, nsuccess])
                     visit[ry][rx] += 1
@@ -179,11 +179,7 @@ def BFS(red_y,red_x,blue_y,blue_x,failure,succession):
             old += new
             new = 0
             cnt += 1
-            if cnt == 10:
-                # print('cntover10')
-                return -1
     # print('emptyQ')
     return -1
 
 print(BFS(R_init[0],R_init[1],B_init[0],B_init[1],False,False))
-# print(BFS(3,5,6,6,False,False))
