@@ -89,3 +89,131 @@
 > 비동기식 JavaScript와 XML, 비동기 통신 웹 개발 기술
 > 
 > 특징으로는 페이지 새로고침 없이 서버에 요청하며 서버로부터 응답 받아 작업을 수행한다
+
+
+# Vue.JS
+
+### Node.js
+
+> 자바스크립트는 브라우저를 조작하는 유일한 어너지만 브라우저 밖에서 구동할 수 없었음
+>
+> 런타임 환경인 Node.js를 통해 브라우저가 아닌 환경에서도 구동할 수 있게 됨 
+
+- NPM (Node Package Manage)
+
+  - python에 pip가 있듯이 Node.js에는 npm이 있음
+  
+  - pip와 마찬가지로 다양한 의존성 패키지 관리
+
+  - node_modules
+
+    - node.js 환경의 여러 의존성 모듈로 python의 venv와 비슷한 역할을 함
+
+      - .gitignore에 넣어줘야 하며 Vue 프로젝트를 생성하면 자동 생성됨
+
+    - Babel
+
+      - JavaScript의 ES6+ 코드를 구버전으로 번역/변환 해주는 도구
+
+      - 브라우저 버전 별로 동작하지 않는 상황을 해결하기 위한 도구
+
+    - Webpack
+
+      - 모듈 간 의존성 문제를 해결하기 위한 도구
+
+      - 프로젝트에 필요한 모든 모듈을 매핑하고 내부적으로 종속성 그래프를 빌드함
+
+  - Module
+
+    - 개발하는 애플리케이션의 크기가 커지고 복잡해지면 파일 하나에 모든 기능을 담기 어려워짐
+
+    - 따라서 파일을 여러 개로 분리하여 관리하고 이때 분리된 파일 각각이 Module (js 파일 하나하나)
+  
+  - Bundler
+
+    - 모듈 의존성 문제를 해결해주는 작업이 Bundling
+
+    - Bundling된 결과물은 개별 모듈 실행 순서에 영향을 받지 않고 동작함
+
+    - Vue CLI는 이러한 Babel, Webpack에 대한 초기 설정이 자동으로 되어 있음
+
+  - package.json
+
+    - 프로젝트의 종속성 목록과 지원되는 브라우저에 대한 구성 옵션 포함
+
+  - package-lock.json
+
+    - node_modules에 설치되는 모듈과 관련된 모든 의존성 설정 및 관리
+
+    - python의 requirements.txt 역할
+
+  - public/index.html
+    
+    - Vue 앱의 뼈대가 되는 html 파일이며 Vue 앱과 연결될 요소가 있음 
+
+  - src/
+
+    - src/assets
+
+      - 정적 파일을 저장하는 디렉토리
+
+    - src/components
+      
+      - 하위 컴포넌트들이 위치
+
+    - src/App.vue
+
+      - 최상위 컴포넌트
+
+      - public/index.html과 연결됨
+
+    - src/main.js
+
+      - webpack이 빌드를 시작할 때 가장 먼저 불러오는 entry point
+
+      - public/index.html과 src/App.vue를 연결시키는 작업이 이루어지는 곳
+      
+      - Vue 전역에서 활용 할 모듈을 등록할 수 있는 파일 
+
+### Component
+
+> UI를 독립적이고 재사용 가능한 조각들로 나눈 것
+>
+> CS에서는 다시 사용할 수 있는 범용성을 위해 개발된 소프트웨어 구성 요소를 의미
+>
+> 하나의 app을 구성할 때 중첩된 컴포넌트들의 tree로 구성하는 것이 보편적
+> ex) Django : base.html - index.html 등 하나의 화면에 base가 들어가는 것 
+
+- 특징
+
+  - 관리 용이
+  
+  - 재사용성
+  
+  - 확장 가능
+
+  - 캡슐화
+
+  - 독립적
+
+- component in Vue
+
+  - Vue instance: new Vue()로 만든 인스턴스
+
+  - SFC (Single File Component)
+  
+  - 구조
+
+    - 탬플릿(HTML)
+
+      - HTML의 body 부분, 눈으로 보여지는 요소
+
+    - 스크립트(JavaScript)
+
+      - JavaScript 코드가 작성되는 곳
+
+      - 컴포넌트 정보, 데이터, 메서드 등 vue 인스턴스를 구성하는 대부분이 작성 됨
+
+    - 스타일(CSS)
+
+      - 컴포넌트의 스타일 담당
