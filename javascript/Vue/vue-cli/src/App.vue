@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <MyComponent /> <!-- 3. 사용한다 -->
       
-    <HelloWorld msg="뷰야 반갑다"/>
+    <HelloWorld msg="This is HelloWorld"/>
   </div>
 </template>
 

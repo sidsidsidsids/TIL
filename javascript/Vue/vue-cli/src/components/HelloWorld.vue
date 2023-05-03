@@ -2,7 +2,6 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      와라라라
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
     <h3>Installed CLI Plugins</h3>
@@ -35,7 +34,6 @@ export default {
   props: {
     msg: {
       type: String,
-      default: 'SSAFY 여러분을 환영합니다',
   }
 }
 }

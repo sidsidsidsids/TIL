@@ -217,3 +217,103 @@
     - 스타일(CSS)
 
       - 컴포넌트의 스타일 담당
+
+- data in components
+
+  - 한 페이지 내에서 같은 데이터를 공유 해야함
+  
+  - 부모 자식 관계만 데이터를 주고받게 함으로써 유지 보수 및 흐름 파악 용이
+  
+  - 부모 -> 자식 : pass props / 자식 -> 부모 : emit event
+
+- pass props
+
+  - 요소의 속성(property)을 사용하여 데이터 전달
+
+  - props는 부모 컴포넌트의 정보를 전달하기 위한 사용자 지정 특성
+
+  - 자식 컴포넌트는 props 옵션을 사용하여 수신하는 props를 선언해야 함
+
+  - prop-data-name="value"의 형태로 데이터를 전달
+
+    - 부모에서 넘겨주는 props는 kebab-case (대소문자 구분 X)
+
+    - 자식에서 받는 props는 camelCase
+
+  - Dynamic props
+
+    - v-bind directive를 사용해 데이터를 동적으로 바인딩
+
+    - 부모 컴포넌트 데이터가 업데이트되면 자식 컴포넌트 데이터도 업데이트
+
+- Emit Event
+
+  - 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달할 때는 이벤트 발생
+
+    - 데이터를 이벤트 리스너의 콜백함수 인자로 전달
+
+    - 상위 컴포넌트는 해당 이벤트를 통해 데이터 받음
+
+  - $emit('event-name') 형식으로 사용하여 부모 컴포넌트에 이벤트를 발생
+
+  - Emit Event 흐름
+
+    - 자식 컴포넌트의 이벤트를 청취하여 연결된 핸들러 함수(ChildToParent) 호출
+
+    - 호출된 함수에서 $emit으로 상위 컴포넌트에 이벤트(child-to-parent) 발생
+
+      - 이벤트에 데이터(child data)를 함께 전달
+
+    - 상위 컴포넌트는 자식 컴포넌트의 이벤트를 청취하여 핸들러 함수(parentGetEvent) 호출
+
+      - 함수의 인자로 전달된 데이터(child data)가 포함됨
+
+- kebab-case와 camelCase 사용 케이스
+
+  - HTML 요소에서 사용할 때는 kebab-case
+
+  - JavaScript에서 사용할 때는 camelCase
+
+  - in props
+
+    - 상위 -> 하위 흐름에서 HTML 요소로 내려줌 : kebab-case
+
+    - 하위에서 받을 때 JavaScript에서 받음 : camelCase
+
+  - in emit
+
+    - emit 이벤트를 발생시키면 HTML 요소가 이벤트를 청취 : kebab-case
+
+    - 메서드, 변수명 등은 JavaScript 에서 사용함 : camelCase
+
+- Lifecycle Hooks
+
+  - Vue instance(컴포넌트)는 생성과 소멸의 과정 중 단계별 초기화 과정을 거침
+
+    - Vue instance가 생성된 경우, 데이터 변경으로 DOM 업데이트하는 경우 등
+
+  - 각 단계가 트리거가 되어 특정 로직을 실행할 수 있는데 이를 Lifecycle Hooks
+
+  - instance마다 각각의 Lifecycle을 가지고 있음
+
+  - 컴포넌트별로 정의할 수 있음
+
+  - 부착 여부가 부모-자식 관계에 따라 순서를 가지고 있지 않음
+
+  - 흐름
+
+    - create
+
+      - Vue instance가 생성된 후 호출되며 data, computed등 설정이 완료된 상태
+
+      - mount되지 않아 요소에 접근할 수 없음
+
+    - mount
+
+      - Vue instance가 요소에 mount된 후 호출되며 요소를 조작할 수 있음
+
+    - update
+
+      - 데이터가 변경되어 DOM에 변화를 줄 때 호출됨
+
+    - destruct
