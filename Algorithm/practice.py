@@ -11,35 +11,29 @@ for i in range(-5, 6):
     Bbit_print(i)
 '''
 
-binary = '10110'
-triple = '2101'
-octal8 = '73'
-sixten = 'A3'
+import heapq
 
-print(int(binary,2))
-print(int(triple,3))
-print(int(octal8,8))
-print(int(sixten,16))
 
-target = '0F97A3'
-target_bin = ''
-for t in target:
-    ten = int(t,16)
-    binary_t = str(bin(ten))[2:]
-    b_l = len(binary_t)
-    if b_l == 3:
-        binary_t = '0' + binary_t
-    elif b_l == 2:
-        binary_t = '00' + binary_t
-    elif b_l == 1:
-        binary_t = '000' + binary_t
-    elif b_l == 0:
-        binary_t = '0000'
-    print(t, binary_t)
-    target_bin += binary_t
-answer = ''
-for i in range(0,len(target_bin),7):
-    target_ten = target_bin[i:i+7]
-    output = str(int(target_ten, 2))
-    answer = answer + output + ' '
-print(answer)
+def find_kth_smallest(lst, k):
+    heap = lst[:]
+    heapq.heapify(heap)
+    print(heap)
+
+    for i in range(k-1, len(lst)):
+        if lst[i] > heap[0]:
+            heapq.heappop(heap)
+            print(heap)
+            heapq.heappush(heap, lst[i])
+            print(heap)
+        else:
+            continue
+
+    return heap[0]
+
+
+lst = [3, 5, 2, 8, 1]
+k = 3
+
+result = find_kth_smallest(lst, k)
+print(result)  # 3
+
