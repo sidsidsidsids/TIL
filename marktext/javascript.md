@@ -317,3 +317,59 @@
       - 데이터가 변경되어 DOM에 변화를 줄 때 호출됨
 
     - destruct
+
+### Vuex
+
+- State Management
+
+  - 상태(State) : 현재에 대한 정보(data)
+
+  - 여러 개의 component가 같은 상태(data)를 유지할 필요가 있음
+
+  - Pass Props & Emit Event
+
+    - 같은 데이터를 공유하고 있으므로 각 컴포넌트가 동일한 상태를 유지함
+
+    - 중첩이 깊어지면 관리하기 힘들어짐 => 중앙 저장소에 데이터를 모아 상태 관리 (Vuex)
+
+  - Vuex = 'state management pattern + library' for vue.js
+
+    - 데이터가 에측 가능한 방식으로만 변경 되도록 규칙을 설정하며 반응성을 효율적으로 사용하게 관리
+
+- Vuex
+
+  - State
+
+    - 중앙에서 관리하는 모든 상태 정보로 개별 component는 state에서 데이터를 가져와서 사용함
+
+    - $store.state로 state 데이터에 접근함
+
+  - Mutations
+
+    - 실제로 state를 변경하는 유일한 방법이며 핸들러 함수는 반드시 동기적이어야 함
+
+      - state 변화 시기를 특정하기 위함 (순서 처리)
+
+    - 첫 인자로 state를 받으며 component 혹은 Actions에서 commit() 메서드로 호출됨
+
+  - Actions
+
+    - state를 변경하지 않고 commit() 메서드로 mutations를 호출해 state를 변경함
+
+    - dispatch() 메서드로 호출됨
+
+  - Getters
+
+    - state를 활용하여 계산된 값을 얻고자 할 때 사용
+
+    - 첫번째 인자로 state, 두번째 인자로 getter 받음
+
+  - 데이터 흐름
+
+    - component에서의 데이터 조작
+
+      - component => (dispatch) -> actions => (commit) => mutations => state
+
+    - component에서의 데이터 사용
+
+      - state => (getter) => component
