@@ -373,3 +373,55 @@
     - component에서의 데이터 사용
 
       - state => (getter) => component
+
+  - Local Storage
+
+    - Window.localStorage
+
+      - 브라우저 내장 객체 중 하나로 key-value 형태로 저장할 수 있는 저장소
+
+      - localStorage에 저장된 데이터는 브라우저를 종료해도 유지 됨
+
+      - setItem(key,value)
+
+        - key, value 형태로 데이터 저장
+
+      - getItem(key)
+
+        - key 값으로 저장된 데이터 불러오기
+
+      - JSON.stringify
+
+        - 자바스크립트 객체를 JSON 형식의 문자열로 변환하여 반환
+
+      - JSON.parse
+
+        - JSON 형식의 문자열을 자바스크립트 객체로 변환하여 반환
+
+      - vuex-persistedstate
+
+        - vuex store의 상태를 브라우저 local storage에 저장해 주는 plugin
+
+  - Vuex Binding Helper
+
+    - Vuex store의 state, mutations, actions 등을 간단히 사용하기 위한 헬퍼
+
+    - 사용하기 위해서는 import 받아와야 함
+
+    - mapState
+
+      - Vuex store의 상태를 컴포넌트 데이터에 객체, 배열 형태로 매핑할 때 사용
+
+    - mapActions
+
+      - this.$store.dispatch() 대신 액션 메서드를 직접 호출하여 사용 가능
+
+    - mapGetters
+
+      - 위 방식들과 동일하게 사용 가능
+
+  - modules
+
+    - Vuex store를 여러 파일로 나눠서 관리 할 수 있게 하는 기능
+
+    - Store의 가독성 향상
