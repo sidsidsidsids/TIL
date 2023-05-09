@@ -425,3 +425,65 @@
     - Vuex store를 여러 파일로 나눠서 관리 할 수 있게 하는 기능
 
     - Store의 가독성 향상
+
+- UX & UI
+
+  - UX (User Experience)
+
+    - 유저와 가장 가까이에 있는 분야로 개발자, 디자이너가 이해할 수 있게 소통
+
+    - UX Researcher, User Researcher
+
+  - UI (User Interface)
+
+    - 유저에게 보여지는 화면을 디자인
+
+    - Product Designer, Interaction Designer
+
+  - Figma
+
+    - Prototyping을 위한 Tool
+
+    - **개발부터 시작하지 말고 반드시 충분한 기획을 거칠 것**
+
+      - 화면, API 등 기획
+
+- Vue Router
+
+  - Routing
+
+    - 네트워크에서 경로를 선택하는 프로세스
+
+    - in SSR
+
+      - Server가 모든 라우팅을 통제
+
+    - in SPA/CSR
+
+      - 서버는 하나의 HTML 만을 제공. 하나의 URL만 가질 수 있음
+
+  - Vue Router
+
+    - Vue의 공식 라우터로 SPA 상에서 라우팅을 쉽게 개발할 수 있는 기능 제공
+
+    - 라우트에 컴포넌트를 매핑한 후 어떤 URL에서 렌더링 할지 알려줌
+
+      - SPA의 단점 중 하나인 URL이 변경되지 않는다 를 해결함
+
+    - router-link
+
+      - a 태그와 비슷한 기능을 하여 URL을 이동시킴, 목표 경로는 'to' 속성으로 지정됨
+
+    - router-view
+
+      - 주어진 URL에 대해 일치하는 컴포넌트를 렌더링 하는 컴포넌트
+
+    - History mode
+
+      - 브라우저의 History API를 활용해 새로고침 없이 URL 이동 기록을 남길 수 있음
+
+    - lazy-loading
+
+      - 미리 로드를 하지 않고 특정 라우트에 방문할 때 매핑된 컴포넌트의 코드 로드 방식 사용 가능
+
+        - 많이 쓰는 기능은 아님
