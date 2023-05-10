@@ -487,3 +487,31 @@
       - 미리 로드를 하지 않고 특정 라우트에 방문할 때 매핑된 컴포넌트의 코드 로드 방식 사용 가능
 
         - 많이 쓰는 기능은 아님
+
+- Navigation Guard
+
+  - Vue router를 통해 특정 URL에 접근할 때 다른 url로 redirect하거나 해당 URL 접근을 막는 방법
+
+  - Global Before Guard
+
+    - 다른 url 주소로 이동할 때 항상 실행하며 router.beforeEach()를 사용하여 설정
+
+    - next()가 호출되기 전까지 화면이 전환되지 않음
+
+  - Router Guard
+
+    - 전체 route가 아닌 특정 route에 대해서만 가드를 설정하고 싶을 때 beforeEnter()로 사용
+
+  - Component Guard
+
+    - beforeRouteUpdate()를 통해 특정 컴포넌트 내에서 가드를 지정할 수 있음
+
+      - ex) url의 params를 직접 바꿔도 페이지 출력은 변하지 않음 -> 컴포넌트가를 재사용 했기 때문
+
+- 404 Not Found
+
+  - 사용자가 요청한 리소스가 존재하지 않을 때 응답
+
+  - 요청한 리소스가 존재하지 않는 경우 (기존 명시 경로가 아닌 경로) 모두 404로 redirect
+
+    - 해당 내용은 route 최하단부에 작성 
