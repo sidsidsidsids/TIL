@@ -515,3 +515,24 @@
   - 요청한 리소스가 존재하지 않는 경우 (기존 명시 경로가 아닌 경로) 모두 404로 redirect
 
     - 해당 내용은 route 최하단부에 작성 
+
+### Server & Client (Vue with DRF)
+
+> Server : 클라이언트에게 정보와 서비스를 제공하는 컴퓨터 시스템
+>
+> 서비스 전체를 제공 == Django Web Service, 정보를 제공 == DRF API Service
+>
+> Client : Server가 제공하는 서비스에 적절한 요청을 통해 반환 받은 응답을 사용자에게 표현
+
+- Cross-Origin Resource Sharing (CORS)
+
+  - 브라우저는 동일 출처 정책(Same-Origin Policy)에 의해 다른 출처의 리소스와의 상호작용을 제한함
+
+  - Origin : 출처, URL의 Protocol, Host, Port를 모두 포함하여 출처라고 부름
+
+  - 교차 출처 리소스 공유 : HTTP Header를 사용하여 다른 출처의 자원에 접근할 수 있는 권한 부여
+
+    - CORS policy(교차 출처 리소스 공유 정책)에 위배되는 경우 브라우저에서 해당 응답 결과 사용 X
+
+  - HTTP Response Header를 통해 CORS 통제 가능
+
