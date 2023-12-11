@@ -117,3 +117,46 @@ Has: 10
   So, if I use struct, when I make a Update, Delete method, must I use point receiver? Plz reply! Thanks! :)
 
 Correct!
+
+### Code
+```
+package main
+
+  
+
+import (
+
+    "fmt"
+
+  
+
+    "github.com/sidsidsidsids/learngo/mydict"
+
+)
+
+  
+
+func main() {
+
+    dictionary := mydict.Dictionary{"first": "First word"}
+
+    baseword := "hello"
+
+    dictionary.Add(baseword, "First")
+
+    dictionary.Search(baseword)
+
+    dictionary.Delete(baseword)
+
+    word, err := dictionary.Search(baseword)
+
+    if err != nil {
+
+        fmt.Println(err)
+
+    }
+
+    fmt.Println(word)
+
+}
+```
